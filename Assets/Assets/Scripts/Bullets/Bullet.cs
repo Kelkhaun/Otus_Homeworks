@@ -5,12 +5,12 @@ namespace ShootEmUp
 {
     public sealed class Bullet : MonoBehaviour
     {
-        [SerializeField] private  Rigidbody2D _rigidbody2D;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        
-        [NonSerialized] public bool _isPlayer;
-        [NonSerialized] public int _damage;
-        
+
+        [NonSerialized] public bool IsPlayer;
+        [NonSerialized] public int Damage;
+
         public event Action<Bullet, Collision2D> CollisionEntered;
 
         private void OnCollisionEnter2D(Collision2D collision)

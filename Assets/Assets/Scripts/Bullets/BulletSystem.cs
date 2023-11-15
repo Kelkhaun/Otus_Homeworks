@@ -3,68 +3,66 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class BulletSystem : MonoBehaviour
+    public sealed class BulletSystem : Pool<Bullet>
     {
-        [SerializeField] private int _initialCount = 50;
-        [SerializeField] private Transform _container;
-        [SerializeField] private Bullet _prefab;
-        [SerializeField] private Transform _worldTransform;
         [SerializeField] private LevelBounds _levelBounds;
 
-        private readonly HashSet<Bullet> m_activeBullets = new();
-        private readonly List<Bullet> m_cache = new();
+        private readonly List<Bullet> _cacheBullets = new();
 
         private MonoPool<Bullet> _bulletPool;
 
         private void Awake()
         {
-            _bulletPool = new MonoPool<Bullet>(_prefab, _initialCount, _container, true);
+            _bulletPool = new MonoPool<Bullet>(Prefab, Size, Container, true);
         }
 
         private void FixedUpdate()
         {
-            m_cache.Clear();
-            m_cache.AddRange(m_activeBullets);
+            _cacheBullets.Clear();
+            _cacheBullets.AddRange(ActiveObject);
 
-            for (int i = 0, count = m_cache.Count; i < count; i++)
+            for (int i = 0, count = _cacheBullets.Count; i < count; i++)
             {
-                var bullet = m_cache[i];
+                var bullet = _cacheBullets[i];
+
                 if (!_levelBounds.InBounds(bullet.transform.position))
                 {
-                    RemoveBullet(bullet);
+                    Release(bullet);
                 }
             }
+        }
+
+        public override Bullet Get()
+        {
+            return _bulletPool.Get();
+        }
+
+        public override void Release(Bullet bullet)
+        {
+            bullet.CollisionEntered -= OnBulletCollision;
+            bullet.transform.SetParent(Container);
+            ActiveObject.Remove(bullet);
         }
 
         public void FlyBulletByArgs(Args args)
         {
             Bullet bullet = _bulletPool.Get();
-            
-            bullet.transform.SetParent(_worldTransform);
+            bullet.transform.SetParent(WorldTransform);
             bullet.SetPosition(args.position);
             bullet.SetColor(args.color);
             bullet.SetPhysicsLayer(args.physicsLayer);
-            bullet._damage = args.damage;
-            bullet._isPlayer = args.isPlayer;
+            bullet.Damage = args.damage;
+            bullet.IsPlayer = args.isPlayer;
             bullet.SetVelocity(args.velocity);
 
-            m_activeBullets.Add(bullet);
+            ActiveObject.Add(bullet);
             bullet.CollisionEntered += OnBulletCollision;
         }
 
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
-            bool isDealDamage = BulletUtils.TryDealDamage(bullet, collision.gameObject);
-
-            if (isDealDamage)
-                RemoveBullet(bullet);
-        }
-
-        private void RemoveBullet(Bullet bullet)
-        {
-            bullet.CollisionEntered -= OnBulletCollision;
-            bullet.transform.SetParent(_container);
-            m_activeBullets.Remove(bullet);
+            BulletUtils.DealDamage(bullet, collision.gameObject);
+            Release(bullet);
         }
 
         public struct Args

@@ -7,17 +7,17 @@ namespace ShootEmUp
         [SerializeField] private WeaponComponent _characterWeapon;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
-
+        
         public void OnFire()
         {
             _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
             {
                 isPlayer = true,
-                physicsLayer = (int) _bulletConfig.physicsLayer,
-                color = _bulletConfig.color,
-                damage = _bulletConfig.damage,
+                physicsLayer = (int) _bulletConfig.PhysicsLayer,
+                color = _bulletConfig.Color,
+                damage = _bulletConfig.Damage,
                 position = _characterWeapon.Position,
-                velocity = _characterWeapon.Rotation * Vector3.up * _bulletConfig.speed
+                velocity = _characterWeapon.Rotation * Vector3.up * _bulletConfig.Speed
             });
         }
     }

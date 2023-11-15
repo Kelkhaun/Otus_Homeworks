@@ -7,7 +7,7 @@ namespace ShootEmUp
     {
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private MoveComponent _moveComponent;
-        [SerializeField] private PlayerFireListener playerFireListener;
+         [FormerlySerializedAs("fireListener")] [SerializeField] private PlayerFireListener playerFireListener;
 
         private void OnEnable()
         {

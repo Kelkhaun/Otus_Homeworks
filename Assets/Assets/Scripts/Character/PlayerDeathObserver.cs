@@ -1,6 +1,5 @@
 ﻿using ShootEmUp;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerDeathObserver : MonoBehaviour
 {
