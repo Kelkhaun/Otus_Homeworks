@@ -5,9 +5,8 @@ namespace ShootEmUp
 {
     public sealed class BulletSystem : MonoBehaviour
     {
-        [SerializeField]
-        private int initialCount = 50;
-        
+        [SerializeField] private int initialCount = 50;
+
         [SerializeField] private Transform container;
         [SerializeField] private Bullet prefab;
         [SerializeField] private Transform worldTransform;
@@ -16,7 +15,7 @@ namespace ShootEmUp
         private readonly Queue<Bullet> m_bulletPool = new();
         private readonly HashSet<Bullet> m_activeBullets = new();
         private readonly List<Bullet> m_cache = new();
-        
+
         private void Awake()
         {
             for (var i = 0; i < this.initialCount; i++)
@@ -25,7 +24,7 @@ namespace ShootEmUp
                 this.m_bulletPool.Enqueue(bullet);
             }
         }
-        
+
         private void FixedUpdate()
         {
             this.m_cache.Clear();
@@ -58,17 +57,19 @@ namespace ShootEmUp
             bullet.damage = args.damage;
             bullet.isPlayer = args.isPlayer;
             bullet.SetVelocity(args.velocity);
-            
+
             if (this.m_activeBullets.Add(bullet))
             {
                 bullet.OnCollisionEntered += this.OnBulletCollision;
             }
         }
-        
+
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
-            BulletUtils.DealDamage(bullet, collision.gameObject);
-            this.RemoveBullet(bullet);
+            bool isDealDamage = BulletUtils.TryDealDamage(bullet, collision.gameObject);
+
+            if (isDealDamage)
+                RemoveBullet(bullet);
         }
 
         private void RemoveBullet(Bullet bullet)
@@ -80,7 +81,7 @@ namespace ShootEmUp
                 this.m_bulletPool.Enqueue(bullet);
             }
         }
-        
+
         public struct Args
         {
             public Vector2 position;
