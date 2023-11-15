@@ -54,17 +54,17 @@ namespace ShootEmUp
             bullet.SetPosition(args.position);
             bullet.SetColor(args.color);
             bullet.SetPhysicsLayer(args.physicsLayer);
-            bullet.damage = args.damage;
-            bullet.isPlayer = args.isPlayer;
+            bullet._damage = args.damage;
+            bullet._isPlayer = args.isPlayer;
             bullet.SetVelocity(args.velocity);
 
             if (this.m_activeBullets.Add(bullet))
             {
-                bullet.OnCollisionEntered += this.OnBulletCollision;
+                bullet.CollisionEntered += this.BulletCollision;
             }
         }
 
-        private void OnBulletCollision(Bullet bullet, Collision2D collision)
+        private void BulletCollision(Bullet bullet, Collision2D collision)
         {
             bool isDealDamage = BulletUtils.TryDealDamage(bullet, collision.gameObject);
 
@@ -76,7 +76,7 @@ namespace ShootEmUp
         {
             if (this.m_activeBullets.Remove(bullet))
             {
-                bullet.OnCollisionEntered -= this.OnBulletCollision;
+                bullet.CollisionEntered -= this.BulletCollision;
                 bullet.transform.SetParent(this.container);
                 this.m_bulletPool.Enqueue(bullet);
             }

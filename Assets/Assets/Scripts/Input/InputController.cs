@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
@@ -6,18 +7,18 @@ namespace ShootEmUp
     {
         [SerializeField] private KeyboardInput keyboardInput;
         [SerializeField] private MoveComponent _moveComponent;
-        [SerializeField] private CharacterController _characterController;
+        [FormerlySerializedAs("playerController")] [FormerlySerializedAs("_characterController")] [SerializeField] private PlayerShooter playerShooter;
 
         private void OnEnable()
         {
-            keyboardInput.Move += _moveComponent.MoveByRigidbodyVelocity;
-            keyboardInput.Fire += _characterController.OnFire;
+            keyboardInput.Move += _moveComponent.OnMove;
+            keyboardInput.Fire += playerShooter.OnFire;
         }
 
         private void OnDisable()
         {
-            keyboardInput.Move -= _moveComponent.MoveByRigidbodyVelocity;
-            keyboardInput.Fire -= _characterController.OnFire;
+            keyboardInput.Move -= _moveComponent.OnMove;
+            keyboardInput.Fire -= playerShooter.OnFire;
         }
     }
 }

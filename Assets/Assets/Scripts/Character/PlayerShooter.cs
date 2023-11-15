@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class CharacterController : MonoBehaviour
+    public sealed class PlayerShooter : MonoBehaviour
     {
         [SerializeField] private WeaponComponent _characterWeapon;
         [SerializeField] private BulletSystem _bulletSystem;
