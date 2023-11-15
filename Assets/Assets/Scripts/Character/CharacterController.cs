@@ -23,6 +23,11 @@ namespace ShootEmUp
 
         private void OnCharacterDeath(GameObject _) => this.gameManager.FinishGame();
 
+        public void OnFire()
+        {
+            _fireRequired = true;
+        }
+        
         private void FixedUpdate()
         {
             if (this._fireRequired)
