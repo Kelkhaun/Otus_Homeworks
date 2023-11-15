@@ -5,20 +5,20 @@ namespace ShootEmUp
 {
     public class InputController : MonoBehaviour
     {
-        [SerializeField] private KeyboardInput keyboardInput;
+        [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private MoveComponent _moveComponent;
-        [FormerlySerializedAs("playerController")] [FormerlySerializedAs("_characterController")] [SerializeField] private PlayerShooter playerShooter;
+        [SerializeField] private PlayerFireListener playerFireListener;
 
         private void OnEnable()
         {
-            keyboardInput.Move += _moveComponent.OnMove;
-            keyboardInput.Fire += playerShooter.OnFire;
+            _keyboardInput.Move += _moveComponent.OnMove;
+            _keyboardInput.Fire += playerFireListener.OnFire;
         }
 
         private void OnDisable()
         {
-            keyboardInput.Move -= _moveComponent.OnMove;
-            keyboardInput.Fire -= playerShooter.OnFire;
+            _keyboardInput.Move -= _moveComponent.OnMove;
+            _keyboardInput.Fire -= playerFireListener.OnFire;
         }
     }
 }

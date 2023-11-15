@@ -5,8 +5,8 @@ namespace ShootEmUp
 {
     public sealed class Bullet : MonoBehaviour
     {
-        [SerializeField] private new Rigidbody2D rigidbody2D;
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private  Rigidbody2D _rigidbody2D;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         
         [NonSerialized] public bool _isPlayer;
         [NonSerialized] public int _damage;
@@ -20,7 +20,7 @@ namespace ShootEmUp
 
         public void SetVelocity(Vector2 velocity)
         {
-            rigidbody2D.velocity = velocity;
+            _rigidbody2D.velocity = velocity;
         }
 
         public void SetPhysicsLayer(int physicsLayer)
@@ -35,7 +35,7 @@ namespace ShootEmUp
 
         public void SetColor(Color color)
         {
-            spriteRenderer.color = color;
+            _spriteRenderer.color = color;
         }
     }
 }

@@ -261,11 +261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bd15923a144ffbab0333dc6e74e641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialCount: 50
-  container: {fileID: 1831741369}
-  prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
-  worldTransform: {fileID: 1683128698}
-  levelBounds: {fileID: 2572952653776768186}
+  _initialCount: 50
+  _container: {fileID: 1831741369}
+  _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
+  _worldTransform: {fileID: 1683128698}
+  _levelBounds: {fileID: 2572952653776768186}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,9 +537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665d43348d204eb5af34f62f691a5821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardInput: {fileID: 1134805361}
+  _keyboardInput: {fileID: 1134805361}
   _moveComponent: {fileID: 4414282821800802398}
-  _characterController: {fileID: 1879759790}
+  playerFireListener: {fileID: 1879759790}
 --- !u!850595691 &1263964384
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b7dd9dd889452da8b52ce689c48f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterHitPointsComponent: {fileID: 4414282821800802401}
+  _playerHitPointsComponent: {fileID: 4414282821800802401}
   _gameManager: {fileID: 3951702117947426123}
 --- !u!212 &4162873433806880330
 SpriteRenderer:

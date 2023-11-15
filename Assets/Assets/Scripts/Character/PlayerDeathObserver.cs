@@ -1,20 +1,21 @@
 ﻿using ShootEmUp;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerDeathObserver : MonoBehaviour
 {
-    [SerializeField] private HitPointsComponent _characterHitPointsComponent;
+    [SerializeField] private HitPointsComponent _playerHitPointsComponent;
     [SerializeField] private GameManager _gameManager;
     
     private void OnEnable()
     {
-        _characterHitPointsComponent.hpEmpty += OnCharacterDeath;
+        _playerHitPointsComponent.hpEmpty += OnPlayerDeath;
     }
 
     private void OnDisable()
     {
-        _characterHitPointsComponent.hpEmpty -= OnCharacterDeath;
+        _playerHitPointsComponent.hpEmpty -= OnPlayerDeath;
     }
 
-    private void OnCharacterDeath(GameObject _) => _gameManager.FinishGame();
+    private void OnPlayerDeath(GameObject _) => _gameManager.FinishGame();
 }

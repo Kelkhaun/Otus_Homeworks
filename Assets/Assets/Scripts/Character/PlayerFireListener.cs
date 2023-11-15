@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class PlayerShooter : MonoBehaviour
+    public sealed class PlayerFireListener : MonoBehaviour
     {
         [SerializeField] private WeaponComponent _characterWeapon;
         [SerializeField] private BulletSystem _bulletSystem;
@@ -10,7 +10,7 @@ namespace ShootEmUp
 
         public void OnFire()
         {
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args()
+            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
             {
                 isPlayer = true,
                 physicsLayer = (int) _bulletConfig.physicsLayer,
