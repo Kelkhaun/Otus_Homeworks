@@ -8,12 +8,12 @@ public class PlayerDeathObserver : MonoBehaviour
     
     private void OnEnable()
     {
-        _playerHitPointsComponent.hpEmpty += OnPlayerDeath;
+        _playerHitPointsComponent.HpEmpty += OnPlayerDeath;
     }
 
     private void OnDisable()
     {
-        _playerHitPointsComponent.hpEmpty -= OnPlayerDeath;
+        _playerHitPointsComponent.HpEmpty -= OnPlayerDeath;
     }
 
     private void OnPlayerDeath(GameObject _) => _gameManager.FinishGame();

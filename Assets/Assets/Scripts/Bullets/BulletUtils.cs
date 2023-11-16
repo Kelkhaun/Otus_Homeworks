@@ -13,7 +13,6 @@ namespace ShootEmUp
 
             if (bullet.IsPlayer == team.IsPlayer)
             {
-                Debug.Log("2");
                 return;
             }
 

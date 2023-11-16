@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 562298204}
   - component: {fileID: 562298207}
   - component: {fileID: 562298205}
+  - component: {fileID: 562298208}
   m_Layer: 0
   m_Name: EnemySystem
   m_TagString: Untagged
@@ -416,7 +417,20 @@ MonoBehaviour:
   Container: {fileID: 178513672}
   WorldTransform: {fileID: 1683128698}
   _enemyPositions: {fileID: 7166351703523243261}
+--- !u!114 &562298208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562298203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb26eea08ef5406cb6c837fd55cd8124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _player: {fileID: 4414282821800802397}
+  _enemyPool: {fileID: 562298207}
 --- !u!1 &883274639
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keyboardInput: {fileID: 1134805361}
   _moveComponent: {fileID: 4414282821800802398}
-  fireListener: {fileID: 1879759790}
+  playerFireListener: {fileID: 1879759790}
 --- !u!850595691 &1263964384
 LightingSettings:
   m_ObjectHideFlags: 0
