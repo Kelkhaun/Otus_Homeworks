@@ -5,7 +5,8 @@ namespace Assets.Scripts.Pool
 {
     public abstract class Pool<T> : MonoBehaviour
     {
-        [Header("Pool")] [SerializeField] protected T Prefab;
+        [Header("Pool")] 
+        [SerializeField] protected T Prefab;
         [SerializeField] protected int Size;
         [SerializeField] protected Transform Container;
         [SerializeField] protected Transform WorldTransform;

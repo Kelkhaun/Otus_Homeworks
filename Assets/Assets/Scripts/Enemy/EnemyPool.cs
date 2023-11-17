@@ -7,7 +7,8 @@ namespace Assets.Scripts.Enemy
 {
     public sealed class EnemyPool : Pool<Enemy>
     {
-        [Header("Spawn")] [SerializeField] private EnemyPositions _enemyPositions;
+        [Header("Spawn")] 
+        [SerializeField] private EnemyPositions _enemyPositions;
 
         private MonoPool<Enemy> _enemyPool;
 
