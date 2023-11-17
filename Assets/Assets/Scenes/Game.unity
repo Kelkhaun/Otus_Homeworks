@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keyboardInput: {fileID: 1134805361}
   _moveComponent: {fileID: 4414282821800802398}
-  playerFireListener: {fileID: 1879759790}
+  _playerFireListener: {fileID: 1879759790}
 --- !u!850595691 &1263964384
 LightingSettings:
   m_ObjectHideFlags: 0
