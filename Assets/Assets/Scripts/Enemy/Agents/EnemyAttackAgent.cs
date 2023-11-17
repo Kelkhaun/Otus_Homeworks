@@ -11,8 +11,8 @@ namespace Assets.Scripts.Enemy.Agents
 
         private GameObject _target;
         private float _currentTime;
-        
-        public event FireHandler OnFire = delegate{  };
+
+        public event FireHandler OnFire = delegate { };
 
         public void SetTarget(GameObject target)
         {

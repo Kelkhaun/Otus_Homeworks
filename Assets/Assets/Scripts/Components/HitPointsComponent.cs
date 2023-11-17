@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.Scripts.Components
 {
     public sealed class HitPointsComponent : MonoBehaviour
-    { 
+    {
         [SerializeField] private int _hitPoints;
 
         public event Action<GameObject> OnEnemyDying;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Components
         public void TakeDamage(int damage)
         {
             _hitPoints -= damage;
-            
+
             if (_hitPoints <= 0)
             {
                 OnEnemyDying?.Invoke(gameObject);

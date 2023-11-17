@@ -65,12 +65,12 @@ namespace Assets.Scripts.Bullets
         private void OnCollisionEntered(Bullet bullet, GameObject collisionObject)
         {
             Release(bullet);
-            
+
             if (!collisionObject.TryGetComponent(out TeamComponent team))
             {
                 return;
             }
-            
+
             if (bullet.IsPlayer == team.IsPlayer)
             {
                 return;

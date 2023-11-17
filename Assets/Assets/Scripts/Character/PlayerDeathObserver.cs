@@ -8,7 +8,7 @@ namespace Assets.Scripts.Character
     {
         [SerializeField] private HitPointsComponent _playerHitPointsComponent;
         [SerializeField] private GameManager _gameManager;
-    
+
         private void OnEnable()
         {
             _playerHitPointsComponent.OnEnemyDying += OnPlayerDeath;

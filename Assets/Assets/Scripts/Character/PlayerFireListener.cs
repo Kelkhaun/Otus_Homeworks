@@ -9,7 +9,7 @@ namespace Assets.Scripts.Character
         [SerializeField] private WeaponComponent _characterWeapon;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
-        
+
         public void OnFire()
         {
             _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
