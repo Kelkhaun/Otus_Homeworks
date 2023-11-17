@@ -14,10 +14,11 @@ namespace Assets.Scripts.Enemy
 
         private int _timeBetweenSpawn = 1;
         private float _force = 2.0f;
+        private bool _canSpawn = true;
 
         private IEnumerator Start()
         {
-            while (true)
+            while (_canSpawn)
             {
                 yield return new WaitForSeconds(_timeBetweenSpawn);
                 Enemy enemy = _enemyPool.Get();
