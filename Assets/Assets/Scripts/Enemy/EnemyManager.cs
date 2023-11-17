@@ -31,8 +31,7 @@ namespace Assets.Scripts.Enemy
 
         private void OnDestroyed(GameObject enemy)
         {
-            Enemy
-                enemyComponent = enemy.GetComponent<Enemy>();
+            Enemy enemyComponent = enemy.GetComponent<Enemy>();
 
             if (_enemyPool.RemoveActiveEnemy(enemyComponent))
             {
