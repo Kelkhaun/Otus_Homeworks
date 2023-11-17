@@ -1,12 +1,11 @@
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Enemy
 {
     public sealed class EnemyPositions : MonoBehaviour
     {
         [SerializeField] private Transform[] _spawnPositions;
-
-         [SerializeField] private Transform[] _attackPositions;
+        [SerializeField] private Transform[] _attackPositions;
 
         public Transform RandomSpawnPosition()
         {
@@ -20,7 +19,7 @@ namespace ShootEmUp
 
         private Transform RandomTransform(Transform[] transforms)
         {
-            var index = Random.Range(0, transforms.Length);
+            int index = Random.Range(0, transforms.Length);
             return transforms[index];
         }
     }

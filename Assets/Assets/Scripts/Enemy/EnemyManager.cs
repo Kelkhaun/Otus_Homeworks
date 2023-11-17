@@ -1,7 +1,10 @@
 using System.Collections;
+using Assets.Scripts.Bullets;
+using Assets.Scripts.Components;
+using Assets.Scripts.Enemy.Agents;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Enemy
 {
     public sealed class EnemyManager : MonoBehaviour
     {
@@ -9,31 +12,31 @@ namespace ShootEmUp
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
 
+        private int _timeBetweenSpawn = 1;
+
         private IEnumerator Start()
         {
             while (true)
             {
-                yield return new WaitForSeconds(1);
-                var enemy = _enemyPool.Get();
+                yield return new WaitForSeconds(_timeBetweenSpawn);
+                Enemy enemy = _enemyPool.Get();
 
-                if (enemy != null)
+                if (_enemyPool.AddActiveEnemy(enemy))
                 {
-                    if (_enemyPool.AddActiveEnemy(enemy))
-                    {
-                        enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
-                        enemy.GetComponent<HitPointsComponent>().HpEmpty += OnDestroyed;
-                    }
+                    enemy.GetComponent<EnemyAttackAgent>().OnFire += OnFire;
+                    enemy.GetComponent<HitPointsComponent>().OnEnemyDying += OnDestroyed;
                 }
             }
         }
 
         private void OnDestroyed(GameObject enemy)
         {
-            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            Enemy
+                enemyComponent = enemy.GetComponent<Enemy>();
 
             if (_enemyPool.RemoveActiveEnemy(enemyComponent))
             {
-                enemy.GetComponent<HitPointsComponent>().HpEmpty -= OnDestroyed;
+                enemy.GetComponent<HitPointsComponent>().OnEnemyDying -= OnDestroyed;
                 enemy.GetComponent<EnemyAttackAgent>().OnFire -= OnFire;
 
                 _enemyPool.Release(enemyComponent);
@@ -44,12 +47,12 @@ namespace ShootEmUp
         {
             _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
             {
-                isPlayer = false,
-                physicsLayer = (int) _bulletConfig.PhysicsLayer,
-                color = _bulletConfig.Color,
-                damage = _bulletConfig.Damage,
-                position = position,
-                velocity = direction * 2.0f
+                IsPlayer = false,
+                PhysicsLayer = (int) _bulletConfig.PhysicsLayer,
+                Color = _bulletConfig.Color,
+                Damage = _bulletConfig.Damage,
+                Position = position,
+                Velocity = direction * 2.0f
             });
         }
     }

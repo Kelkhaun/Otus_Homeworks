@@ -1,6 +1,8 @@
+using Assets.Scripts.Bullets;
+using Assets.Scripts.Components;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Character
 {
     public sealed class PlayerFireListener : MonoBehaviour
     {
@@ -12,12 +14,12 @@ namespace ShootEmUp
         {
             _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
             {
-                isPlayer = true,
-                physicsLayer = (int) _bulletConfig.PhysicsLayer,
-                color = _bulletConfig.Color,
-                damage = _bulletConfig.Damage,
-                position = _characterWeapon.Position,
-                velocity = _characterWeapon.Rotation * Vector3.up * _bulletConfig.Speed
+                IsPlayer = true,
+                PhysicsLayer = (int) _bulletConfig.PhysicsLayer,
+                Color = _bulletConfig.Color,
+                Damage = _bulletConfig.Damage,
+                Position = _characterWeapon.Position,
+                Velocity = _characterWeapon.Rotation * Vector3.up * _bulletConfig.Speed
             });
         }
     }

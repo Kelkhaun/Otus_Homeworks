@@ -1,24 +1,25 @@
+using Assets.Scripts.Character;
+using Assets.Scripts.Components;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Input
 {
-    public class InputController : MonoBehaviour
+    public sealed class InputController : MonoBehaviour
     {
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private MoveComponent _moveComponent;
-         [FormerlySerializedAs("fireListener")] [SerializeField] private PlayerFireListener playerFireListener;
+        [SerializeField] private PlayerFireListener _playerFireListener;
 
         private void OnEnable()
         {
-            _keyboardInput.Move += _moveComponent.OnMove;
-            _keyboardInput.Fire += playerFireListener.OnFire;
+            _keyboardInput.OnMove += _moveComponent.OnMove;
+            _keyboardInput.OnFire += _playerFireListener.OnFire;
         }
 
         private void OnDisable()
         {
-            _keyboardInput.Move -= _moveComponent.OnMove;
-            _keyboardInput.Fire -= playerFireListener.OnFire;
+            _keyboardInput.OnMove -= _moveComponent.OnMove;
+            _keyboardInput.OnFire -= _playerFireListener.OnFire;
         }
     }
 }

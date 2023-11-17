@@ -1,23 +1,26 @@
-﻿using ShootEmUp;
+﻿using Assets.Scripts.Enemy.Agents;
 using UnityEngine;
 
-public class SpawnEnemyObserver : MonoBehaviour
+namespace Assets.Scripts.Enemy
 {
-    [SerializeField] private GameObject _player;
-    [SerializeField] private EnemyPool _enemyPool;
+    public sealed class SpawnEnemyObserver : MonoBehaviour
+    {
+        [SerializeField] private GameObject _player;
+        [SerializeField] private EnemyPool _enemyPool;
     
-    private void OnEnable()
-    {
-        _enemyPool.EnemySpawned += OnEnemySpawn;
-    }
+        private void OnEnable()
+        {
+            _enemyPool.OnEnemySpawned += OnEnemySpawn;
+        }
 
-    private void OnDisable()
-    {
-        _enemyPool.EnemySpawned -= OnEnemySpawn;
-    }
+        private void OnDisable()
+        {
+            _enemyPool.OnEnemySpawned -= OnEnemySpawn;
+        }
 
-    private void OnEnemySpawn(Enemy enemy)
-    {
-        enemy.GetComponent<EnemyAttackAgent>().SetTarget(_player);
+        private void OnEnemySpawn(Enemy enemy)
+        {
+            enemy.GetComponent<EnemyAttackAgent>().SetTarget(_player);
+        }
     }
 }

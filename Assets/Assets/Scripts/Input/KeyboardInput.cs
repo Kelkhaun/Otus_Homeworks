@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Input
 {
     public sealed class KeyboardInput : MonoBehaviour
     {
@@ -12,30 +11,30 @@ namespace ShootEmUp
 
         private float _horizontalDirection;
 
-        public event Action<Vector2> Move;
-        public event Action Fire;
+        public event Action<Vector2> OnMove;
+        public event Action OnFire;
 
         private void Update()
         {
-            if (Input.GetKeyDown(_shootKey))
+            if (UnityEngine.Input.GetKeyDown(_shootKey))
             {
-                Fire?.Invoke();
+                OnFire?.Invoke();
             }
 
-            if (Input.GetKey(_leftKey))
+            if (UnityEngine.Input.GetKey(_leftKey))
             {
                 _horizontalDirection = -1;
-                Move?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
+                OnMove?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
             }
-            else if (Input.GetKey(_rightKey))
+            else if (UnityEngine.Input.GetKey(_rightKey))
             {
                 _horizontalDirection = 1;
-                Move?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
+                OnMove?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
             }
             else
             {
                 _horizontalDirection = 0;
-                Move?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
+                OnMove?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
             }
         }
     }

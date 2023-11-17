@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Components
 {
     public sealed class HitPointsComponent : MonoBehaviour
     { 
         [SerializeField] private int _hitPoints;
 
-        public event Action<GameObject> HpEmpty;
+        public event Action<GameObject> OnEnemyDying;
 
         public bool IsHitPointsExists()
         {
@@ -20,7 +20,7 @@ namespace ShootEmUp
             
             if (_hitPoints <= 0)
             {
-                HpEmpty?.Invoke(gameObject);
+                OnEnemyDying?.Invoke(gameObject);
             }
         }
     }

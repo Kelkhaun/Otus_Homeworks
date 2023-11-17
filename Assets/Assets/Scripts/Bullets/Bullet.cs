@@ -1,21 +1,26 @@
 using System;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Bullets
 {
     public sealed class Bullet : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        [NonSerialized] public bool IsPlayer;
-        [NonSerialized] public int Damage;
+        public bool IsPlayer { get; private set; }
+        public int Damage { get; private set; }
 
-        public event Action<Bullet, Collision2D> CollisionEntered;
+        public event Action<Bullet, GameObject> OnCollisionEntered;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            CollisionEntered?.Invoke(this, collision);
+            OnCollisionEntered?.Invoke(this, collision.gameObject);
+        }
+
+        public void SetDamage(int damage)
+        {
+            Damage = damage;
         }
 
         public void SetVelocity(Vector2 velocity)
@@ -36,6 +41,11 @@ namespace ShootEmUp
         public void SetColor(Color color)
         {
             _spriteRenderer.color = color;
+        }
+
+        public void SetIsPlayer(bool isPlayer)
+        {
+            IsPlayer = isPlayer;
         }
     }
 }

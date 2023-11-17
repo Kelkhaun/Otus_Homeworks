@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using Assets.Scripts.Components;
+using Assets.Scripts.Level;
+using Assets.Scripts.Pool;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Bullets
 {
     public sealed class BulletSystem : Pool<Bullet>
     {
@@ -13,7 +16,7 @@ namespace ShootEmUp
 
         private void Awake()
         {
-            _bulletPool = new MonoPool<Bullet>(Prefab, Size, Container, true);
+            _bulletPool = new MonoPool<Bullet>(Prefab, Size, Container);
         }
 
         private void FixedUpdate()
@@ -39,7 +42,7 @@ namespace ShootEmUp
 
         public override void Release(Bullet bullet)
         {
-            bullet.CollisionEntered -= OnBulletCollision;
+            bullet.OnCollisionEntered -= OnCollisionEntered;
             bullet.transform.SetParent(Container);
             ActiveObject.Remove(bullet);
         }
@@ -48,31 +51,45 @@ namespace ShootEmUp
         {
             Bullet bullet = _bulletPool.Get();
             bullet.transform.SetParent(WorldTransform);
-            bullet.SetPosition(args.position);
-            bullet.SetColor(args.color);
-            bullet.SetPhysicsLayer(args.physicsLayer);
-            bullet.Damage = args.damage;
-            bullet.IsPlayer = args.isPlayer;
-            bullet.SetVelocity(args.velocity);
+            bullet.SetPosition(args.Position);
+            bullet.SetColor(args.Color);
+            bullet.SetPhysicsLayer(args.PhysicsLayer);
+            bullet.SetDamage(args.Damage);
+            bullet.SetIsPlayer(args.IsPlayer);
+            bullet.SetVelocity(args.Velocity);
 
             ActiveObject.Add(bullet);
-            bullet.CollisionEntered += OnBulletCollision;
+            bullet.OnCollisionEntered += OnCollisionEntered;
         }
 
-        private void OnBulletCollision(Bullet bullet, Collision2D collision)
+        private void OnCollisionEntered(Bullet bullet, GameObject collisionObject)
         {
-            BulletUtils.DealDamage(bullet, collision.gameObject);
             Release(bullet);
+            
+            if (!collisionObject.TryGetComponent(out TeamComponent team))
+            {
+                return;
+            }
+            
+            if (bullet.IsPlayer == team.IsPlayer)
+            {
+                return;
+            }
+
+            if (collisionObject.TryGetComponent(out HitPointsComponent hitPoints))
+            {
+                hitPoints.TakeDamage(bullet.Damage);
+            }
         }
 
         public struct Args
         {
-            public Vector2 position;
-            public Vector2 velocity;
-            public Color color;
-            public int physicsLayer;
-            public int damage;
-            public bool isPlayer;
+            public Vector2 Position;
+            public Vector2 Velocity;
+            public Color Color;
+            public int PhysicsLayer;
+            public int Damage;
+            public bool IsPlayer;
         }
     }
 }

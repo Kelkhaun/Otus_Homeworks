@@ -1,6 +1,7 @@
+using Assets.Scripts.Common;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace Assets.Scripts.Bullets
 {
     [CreateAssetMenu(
         fileName = "BulletConfig",
@@ -8,9 +9,9 @@ namespace ShootEmUp
     )]
     public sealed class BulletConfig : ScriptableObject
     {
-        [SerializeField] public PhysicsLayer PhysicsLayer;
-        [SerializeField] public Color Color;
-        [SerializeField] public int Damage;
-        [SerializeField] public float Speed;
+        [field:SerializeField] public PhysicsLayer PhysicsLayer { get; private set; }
+        [field:SerializeField] public Color Color { get; private set; }
+        [field:SerializeField] public int Damage { get; private set; }
+        [field:SerializeField] public float Speed { get; private set; }
     }
 }
