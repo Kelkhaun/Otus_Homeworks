@@ -28,7 +28,7 @@ namespace Assets.Scripts.Bullets
             {
                 var bullet = _cacheBullets[i];
 
-                if (!_levelBounds.InBounds(bullet.transform.position))
+                if (!_levelBounds.IsBounds(bullet.transform.position))
                 {
                     Release(bullet);
                 }

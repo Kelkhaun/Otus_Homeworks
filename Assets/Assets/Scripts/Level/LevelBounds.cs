@@ -9,7 +9,7 @@ namespace Assets.Scripts.Level
         [SerializeField] private Transform _downBorder;
         [SerializeField] private Transform _topBorder;
 
-        public bool InBounds(Vector3 position)
+        public bool IsBounds(Vector3 position)
         {
             var positionX = position.x;
             var positionY = position.y;
