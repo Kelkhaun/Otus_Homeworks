@@ -13,7 +13,7 @@ namespace Assets.Scripts.Level
         {
             var positionX = position.x;
             var positionY = position.y;
-            
+
             return positionX > _leftBorder.position.x
                    && positionX < _rightBorder.position.x
                    && positionY > _downBorder.position.y

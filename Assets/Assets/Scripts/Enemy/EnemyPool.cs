@@ -7,8 +7,7 @@ namespace Assets.Scripts.Enemy
 {
     public sealed class EnemyPool : Pool<Enemy>
     {
-        [Header("Spawn")] 
-        [SerializeField] private EnemyPositions _enemyPositions;
+        [Header("Spawn")] [SerializeField] private EnemyPositions _enemyPositions;
 
         private MonoPool<Enemy> _enemyPool;
 
@@ -23,7 +22,7 @@ namespace Assets.Scripts.Enemy
         {
             return ActiveObject.Add(enemy);
         }
-        
+
         public bool RemoveActiveEnemy(Enemy enemy)
         {
             return ActiveObject.Remove(enemy);
@@ -43,7 +42,7 @@ namespace Assets.Scripts.Enemy
         {
             Enemy enemy = _enemyPool.Get();
             InitializeEnemy(enemy);
-            
+
             return enemy;
         }
 

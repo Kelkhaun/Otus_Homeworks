@@ -7,7 +7,7 @@ namespace Assets.Scripts.Enemy
     {
         [SerializeField] private GameObject _player;
         [SerializeField] private EnemyPool _enemyPool;
-    
+
         private void OnEnable()
         {
             _enemyPool.OnEnemySpawned += OnEnemySpawn;

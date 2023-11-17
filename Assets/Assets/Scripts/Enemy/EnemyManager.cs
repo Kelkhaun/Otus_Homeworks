@@ -13,6 +13,7 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private BulletConfig _bulletConfig;
 
         private int _timeBetweenSpawn = 1;
+        private float _force = 2.0f;
 
         private IEnumerator Start()
         {
@@ -51,7 +52,7 @@ namespace Assets.Scripts.Enemy
                 Color = _bulletConfig.Color,
                 Damage = _bulletConfig.Damage,
                 Position = position,
-                Velocity = direction * 2.0f
+                Velocity = direction * _force
             });
         }
     }
