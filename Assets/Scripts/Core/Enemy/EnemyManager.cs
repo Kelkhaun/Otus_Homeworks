@@ -37,9 +37,9 @@ namespace Core.Enemy
             {
                 EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
                 EnemyMoveAgent enemyMoveAgent = enemy.GetComponent<EnemyMoveAgent>();
+                
                 enemyAttackAgent.OnFire -= OnFire;
                 enemy.GetComponent<HitPointsComponent>().OnEnemyDying -= OnDestroyed;
-            
                 _gameManager.RemoveListener(enemyMoveAgent);
                 _gameManager.RemoveListener(enemyAttackAgent);
 
@@ -71,9 +71,9 @@ namespace Core.Enemy
                 {
                     EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
                     EnemyMoveAgent enemyMoveAgent = enemy.GetComponent<EnemyMoveAgent>();
+                    
                     enemyAttackAgent.OnFire += OnFire;
                     enemy.GetComponent<HitPointsComponent>().OnEnemyDying += OnDestroyed; 
-            
                     _gameManager.AddListener(enemyAttackAgent);
                     _gameManager.AddListener(enemyMoveAgent);
                 }
