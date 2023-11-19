@@ -13,7 +13,7 @@ namespace Ui
             gameObject.SetActive(false);
         }
 
-        public void OnStartGame()
+        public new void OnStartGame()
         {
             gameObject.SetActive(false);
         }

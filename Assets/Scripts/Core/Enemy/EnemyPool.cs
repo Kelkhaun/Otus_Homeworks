@@ -13,7 +13,6 @@ namespace Core.Enemy
         private MonoPool<Enemy> _enemyPool;
 
         public event Action<Enemy> OnEnemySpawned;
-        public event Action<Enemy> OnEnemyReleased;
 
         private void Awake()
         {
@@ -50,7 +49,6 @@ namespace Core.Enemy
 
         public override void Release(Enemy enemy)
         {
-            OnEnemyReleased?.Invoke(enemy);
             _enemyPool.Release(enemy);
             enemy.transform.SetParent(Container);
         }
