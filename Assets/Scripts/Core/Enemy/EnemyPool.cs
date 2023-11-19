@@ -5,31 +5,32 @@ using UnityEngine;
 
 namespace Core.Enemy
 {
-    public sealed class EnemyPool : Pool<Core.Enemy.Enemy>
+    public sealed class EnemyPool : Pool<Enemy>
     {
         [Header("Spawn")] 
         [SerializeField] private EnemyPositions _enemyPositions;
 
-        private MonoPool<Core.Enemy.Enemy> _enemyPool;
+        private MonoPool<Enemy> _enemyPool;
 
-        public event Action<Core.Enemy.Enemy> OnEnemySpawned;
+        public event Action<Enemy> OnEnemySpawned;
+        public event Action<Enemy> OnEnemyReleased;
 
         private void Awake()
         {
-            _enemyPool = new MonoPool<Core.Enemy.Enemy>(Prefab, Size, Container);
+            _enemyPool = new MonoPool<Enemy>(Prefab, Size, Container);
         }
 
-        public bool AddActiveEnemy(Core.Enemy.Enemy enemy)
+        public bool AddActiveEnemy(Enemy enemy)
         {
             return ActiveObject.Add(enemy);
         }
 
-        public bool RemoveActiveEnemy(Core.Enemy.Enemy enemy)
+        public bool RemoveActiveEnemy(Enemy enemy)
         {
             return ActiveObject.Remove(enemy);
         }
 
-        private void InitializeEnemy(Core.Enemy.Enemy enemy)
+        private void InitializeEnemy(Enemy enemy)
         {
             enemy.transform.SetParent(WorldTransform);
             var spawnPosition = _enemyPositions.RandomSpawnPosition();
@@ -39,16 +40,17 @@ namespace Core.Enemy
             OnEnemySpawned?.Invoke(enemy);
         }
 
-        public override Core.Enemy.Enemy Get()
+        public override Enemy Get()
         {
-            Core.Enemy.Enemy enemy = _enemyPool.Get();
+            Enemy enemy = _enemyPool.Get();
             InitializeEnemy(enemy);
 
             return enemy;
         }
 
-        public override void Release(Core.Enemy.Enemy enemy)
+        public override void Release(Enemy enemy)
         {
+            OnEnemyReleased?.Invoke(enemy);
             _enemyPool.Release(enemy);
             enemy.transform.SetParent(Container);
         }

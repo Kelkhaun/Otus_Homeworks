@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace Core.Character
 {
-    public sealed class PlayerDeathObserver : MonoBehaviour
+    public sealed class PlayerDeathObserver : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
         [SerializeField] private HitPointsComponent _playerHitPointsComponent;
         [SerializeField] private GameManager _gameManager;
 
-        private void OnEnable()
+        public void OnStartGame()
         {
             _playerHitPointsComponent.OnEnemyDying += OnPlayerDeath;
         }
 
-        private void OnDisable()
+        public void OnFinishGame()
         {
             _playerHitPointsComponent.OnEnemyDying -= OnPlayerDeath;
         }

@@ -1,7 +1,9 @@
-﻿namespace Infrastructure.Installers
+﻿using System.Collections.Generic;
+
+namespace Infrastructure.Installers
 {
     public interface IInstaller
     {
-        IGameListener Install();
+        List<IGameListener> Install();
     }
 }

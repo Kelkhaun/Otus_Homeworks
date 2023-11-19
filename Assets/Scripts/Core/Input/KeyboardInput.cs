@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Input
 {
-    public sealed class KeyboardInput : MonoBehaviour
+    public sealed class KeyboardInput : MonoBehaviour, IGameUpdateListener
     {
         [SerializeField] private KeyCode _shootKey = KeyCode.Space;
         [SerializeField] private KeyCode _leftKey = KeyCode.LeftArrow;
@@ -13,8 +13,8 @@ namespace Core.Input
 
         public event Action<Vector2> OnMove;
         public event Action OnFire;
-
-        private void Update()
+        
+        public void OnUpdate(float deltaTime)
         {
             if (UnityEngine.Input.GetKeyDown(_shootKey))
             {

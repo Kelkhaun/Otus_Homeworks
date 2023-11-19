@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Enemy.Agents
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour
+    public sealed class EnemyMoveAgent : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField] private MoveComponent _moveComponent;
 
@@ -12,7 +12,7 @@ namespace Core.Enemy.Agents
 
         public bool IsReached { get; private set; }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (IsReached)
             {

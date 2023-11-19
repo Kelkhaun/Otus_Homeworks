@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using Core.Level;
 using UnityEngine;
 
 namespace Infrastructure.Installers
 {
-    public sealed class TimeScaleListenerInstaller : MonoBehaviour, IInstaller
+    public sealed class LevelGameListenerInstaller : MonoBehaviour, IInstaller
     {
-        [SerializeField] private TimeScaleListener _timeScaleListener;
+        [SerializeField] private LevelBackground _levelBackground;
             
         public List<IGameListener> Install()
         {
             var listeners = new List<IGameListener>
             {
-                _timeScaleListener,
+                _levelBackground,
             };
 
             return listeners;

@@ -1,15 +1,18 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using UnityEngine;
 
 namespace Infrastructure
 {
     public sealed class GameManager : SerializedMonoBehaviour
     {
         private readonly List<IGameListener> _listeners = new();
+        private readonly List<IGameUpdateListener> _updateListeners = new();
+        private readonly List<IGameFixedUpdateListener> _fixedUpdateListeners = new();
 
-        [OdinSerialize][ReadOnly] public GameState State { get; private set; }
-        
+        [OdinSerialize] [ReadOnly] public GameState State { get; private set; }
+
         public void AddListener(IGameListener listener)
         {
             if (listener == null)
@@ -18,8 +21,18 @@ namespace Infrastructure
             }
 
             _listeners.Add(listener);
+
+            if (listener is IGameUpdateListener updateListener)
+            {
+                _updateListeners.Add(updateListener);
+            }
+
+            if (listener is IGameFixedUpdateListener fixedUpdateListener)
+            {
+                _fixedUpdateListeners.Add(fixedUpdateListener);
+            }
         }
-        
+
         public void RemoveListener(IGameListener listener)
         {
             if (listener == null)
@@ -43,7 +56,7 @@ namespace Infrastructure
 
             State = GameState.PLAYING;
         }
-        
+
         [Button]
         public void PauseGame()
         {
@@ -84,6 +97,38 @@ namespace Infrastructure
             }
 
             State = GameState.FINISHED;
+        }
+
+        private void Update()
+        {
+            if (State != GameState.PLAYING)
+            {
+                return;
+            }
+
+            var deltaTime = Time.deltaTime;
+
+            for (int i = 0, count = _updateListeners.Count; i < count; i++)
+            {
+                var listener = _updateListeners[i];
+                listener.OnUpdate(deltaTime);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (State != GameState.PLAYING)
+            {
+                return;
+            }
+
+            var deltaTime = Time.fixedDeltaTime;
+
+            for (int i = 0, count = _fixedUpdateListeners.Count; i < count; i++)
+            {
+                var listener = _fixedUpdateListeners[i];
+                listener.OnFixedUpdate(deltaTime);
+            }
         }
     }
 }

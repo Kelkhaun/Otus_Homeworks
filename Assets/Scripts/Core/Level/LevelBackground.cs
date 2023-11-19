@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Level
 {
-    public sealed class LevelBackground : MonoBehaviour
+    public sealed class LevelBackground : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField] private Params _params;
 
@@ -25,7 +25,7 @@ namespace Core.Level
             _positionZ = position.z;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (_transform.position.y <= _endPositionY)
             {

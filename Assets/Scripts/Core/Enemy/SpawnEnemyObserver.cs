@@ -3,22 +3,22 @@ using UnityEngine;
 
 namespace Core.Enemy
 {
-    public sealed class SpawnEnemyObserver : MonoBehaviour
+    public sealed class SpawnEnemyObserver : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
         [SerializeField] private GameObject _player;
         [SerializeField] private EnemyPool _enemyPool;
 
-        private void OnEnable()
+        public void OnStartGame()
         {
             _enemyPool.OnEnemySpawned += OnEnemySpawn;
         }
 
-        private void OnDisable()
+        public void OnFinishGame()
         {
             _enemyPool.OnEnemySpawned -= OnEnemySpawn;
         }
 
-        private void OnEnemySpawn(Core.Enemy.Enemy enemy)
+        private void OnEnemySpawn(Enemy enemy)
         {
             enemy.GetComponent<EnemyAttackAgent>().SetTarget(_player);
         }

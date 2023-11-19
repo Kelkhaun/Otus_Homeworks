@@ -3,16 +3,16 @@ using UnityEngine.UI;
 
 namespace Ui
 {
-   public abstract class GameButton : MonoBehaviour
+   public abstract class GameButton : MonoBehaviour, IGameStartListener, IGameFinishListener
    {
       [SerializeField] private Button _button;
 
-      private void OnEnable()
+      public void OnStartGame()
       {
          _button.onClick.AddListener(OnButtonClicked);
       }
 
-      private void OnDisable()
+      public void OnFinishGame()
       {
          _button.onClick.RemoveListener(OnButtonClicked);
       }

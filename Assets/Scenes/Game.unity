@@ -465,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dae85f8264479bac19d85418d92392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameManager: {fileID: 3951702117947426123}
   _enemyPool: {fileID: 562298207}
   _bulletSystem: {fileID: 363245577}
   _bulletConfig: {fileID: 11400000, guid: 35fc60c627b06724f9b0ce8bb7a1aaad, type: 2}
@@ -1082,7 +1083,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1540253225}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1540253227}
+        m_TargetAssemblyTypeName: Ui.StartGameButton, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1540253225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2051,8 +2064,10 @@ GameObject:
   - component: {fileID: 3951702117947426126}
   - component: {fileID: 3951702117947426127}
   - component: {fileID: 3951702117947426128}
-  - component: {fileID: 3951702117947426130}
   - component: {fileID: 3951702117947426131}
+  - component: {fileID: 3951702117947426133}
+  - component: {fileID: 3951702117947426130}
+  - component: {fileID: 3951702117947426132}
   m_Layer: 0
   m_Name: '[GAME_SYSTEM]'
   m_TagString: Untagged
@@ -2138,8 +2153,10 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 3951702117947426127}
     - {fileID: 3951702117947426128}
-    - {fileID: 3951702117947426130}
     - {fileID: 3951702117947426131}
+    - {fileID: 3951702117947426130}
+    - {fileID: 3951702117947426133}
+    - {fileID: 3951702117947426132}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -2151,7 +2168,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 6
     - Name: 
       Entry: 10
       Data: 0
@@ -2164,6 +2181,12 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
     - Name: 
       Entry: 13
       Data: 
@@ -2183,6 +2206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputController: {fileID: 1134805362}
+  _keyboardInput: {fileID: 1134805361}
+  _playerDeathObserver: {fileID: 1923440880}
 --- !u!114 &3951702117947426128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,6 +2221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 562298205}
+  _spawnEnemyObserver: {fileID: 562298208}
 --- !u!114 &3951702117947426130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,10 +2244,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 3951702117947426121}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3f8c3e8317a48fb8db7318040de226d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8616361b0c434a439e7ef2e25a35bfc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseButton: {fileID: 1714970795}
   _startGameButton: {fileID: 1540253227}
+--- !u!114 &3951702117947426132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951702117947426121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979a8a3b0e5842e591fd58e0774c99eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelBackground: {fileID: 4852396043583267082}
+--- !u!114 &3951702117947426133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951702117947426121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae520676656489d9756b9e703f0fe79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletSystem: {fileID: 363245577}
 --- !u!212 &4162873433806880330
 SpriteRenderer:
   m_ObjectHideFlags: 0

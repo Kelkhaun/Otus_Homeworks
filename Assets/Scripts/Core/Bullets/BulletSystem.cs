@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Core.Bullets
 {
-    public sealed class BulletSystem : Pool<Bullet>
+    public sealed class BulletSystem : Pool<Bullet>, IGameFixedUpdateListener
     {
         [SerializeField] private LevelBounds _levelBounds;
 
@@ -19,7 +19,7 @@ namespace Core.Bullets
             _bulletPool = new MonoPool<Bullet>(Prefab, Size, Container);
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             _cacheBullets.Clear();
             _cacheBullets.AddRange(ActiveObject);

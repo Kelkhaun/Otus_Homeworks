@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Core.Enemy.Agents
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour, IGameFixedUpdateListener
     {
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private EnemyMoveAgent _moveAgent;
@@ -24,7 +24,7 @@ namespace Core.Enemy.Agents
             _currentTime = _countdown;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (!_moveAgent.IsReached)
             {
