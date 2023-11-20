@@ -1,15 +1,14 @@
+using System;
 using System.Collections;
 using Core.Bullets;
 using Core.Components;
 using Core.Enemy.Agents;
-using Infrastructure;
 using UnityEngine;
 
 namespace Core.Enemy
 {
     public sealed class EnemyManager : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private GameManager _gameManager;
         [SerializeField] private EnemyPool _enemyPool;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
@@ -18,6 +17,9 @@ namespace Core.Enemy
         private int _timeBetweenSpawn = 1;
         private float _force = 2.0f;
         private bool _canSpawn = true;
+
+        public event Action<Enemy> OnEnemySpawn;
+        public event Action<Enemy> OnEnemyDying;
 
         public void OnStartGame()
         {
@@ -36,12 +38,10 @@ namespace Core.Enemy
             if (_enemyPool.RemoveActiveEnemy(enemyComponent))
             {
                 EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
-                EnemyMoveAgent enemyMoveAgent = enemy.GetComponent<EnemyMoveAgent>();
                 
+                OnEnemyDying?.Invoke(enemyComponent);
                 enemyAttackAgent.OnFire -= OnFire;
                 enemy.GetComponent<HitPointsComponent>().OnEnemyDying -= OnDestroyed;
-                _gameManager.RemoveListener(enemyMoveAgent);
-                _gameManager.RemoveListener(enemyAttackAgent);
 
                 _enemyPool.Release(enemyComponent);
             }
@@ -70,12 +70,10 @@ namespace Core.Enemy
                 if (_enemyPool.AddActiveEnemy(enemy))
                 {
                     EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
-                    EnemyMoveAgent enemyMoveAgent = enemy.GetComponent<EnemyMoveAgent>();
                     
+                    OnEnemySpawn?.Invoke(enemy);
                     enemyAttackAgent.OnFire += OnFire;
                     enemy.GetComponent<HitPointsComponent>().OnEnemyDying += OnDestroyed; 
-                    _gameManager.AddListener(enemyAttackAgent);
-                    _gameManager.AddListener(enemyMoveAgent);
                 }
             }
         }

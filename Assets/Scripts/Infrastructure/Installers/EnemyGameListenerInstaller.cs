@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Core.Enemy;
-using Core.Enemy.Agents;
 using UnityEngine;
 
 namespace Infrastructure.Installers
@@ -9,6 +8,8 @@ namespace Infrastructure.Installers
     {
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private SpawnEnemyObserver _spawnEnemyObserver;
+        [SerializeField] private EnemySpawnObserver _enemySpawnObserver;
+        [SerializeField] private EnemyDeathObserver _enemyDeathObserver;
     
         public List<IGameListener> Install()
         {
@@ -16,6 +17,8 @@ namespace Infrastructure.Installers
             {
                 _enemyManager,
                 _spawnEnemyObserver,
+                _enemySpawnObserver,
+                _enemyDeathObserver
             };
 
             return listeners;
