@@ -8,7 +8,7 @@ namespace Infrastructure.Installers
     {
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private SpawnEnemyObserver _spawnEnemyObserver;
-        [SerializeField] private EnemySpawnObserver _enemySpawnObserver;
+        [SerializeField] private SpawnEnemyObserver _enemySpawnObserver;
         [SerializeField] private EnemyDeathObserver _enemyDeathObserver;
     
         public List<IGameListener> Install()

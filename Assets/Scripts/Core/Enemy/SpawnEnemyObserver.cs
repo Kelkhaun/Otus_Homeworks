@@ -1,4 +1,5 @@
 ﻿using Core.Enemy.Agents;
+using Infrastructure;
 using UnityEngine;
 
 namespace Core.Enemy
@@ -7,6 +8,8 @@ namespace Core.Enemy
     {
         [SerializeField] private GameObject _player;
         [SerializeField] private EnemyPool _enemyPool;
+        [SerializeField] private GameManager _gameManager;
+        [SerializeField] private EnemyManager _enemyManager;
 
         public void OnStartGame()
         {
@@ -21,6 +24,12 @@ namespace Core.Enemy
         private void OnEnemySpawn(Enemy enemy)
         {
             enemy.GetComponent<EnemyAttackAgent>().SetTarget(_player);
+            
+            EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
+            EnemyMoveAgent enemyMoveAgent = enemy.GetComponent<EnemyMoveAgent>();
+
+            _gameManager.AddListener(enemyAttackAgent);
+            _gameManager.AddListener(enemyMoveAgent);
         }
     }
 }
