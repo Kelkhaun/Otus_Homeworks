@@ -211,7 +211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponComponent: {fileID: 5568771391735819374}
   _moveAgent: {fileID: 8186052948131603766}
-  _countdown: 1
+  _bulletConfig: {fileID: 11400000, guid: 35fc60c627b06724f9b0ce8bb7a1aaad, type: 2}
+  _countdown: 3
 --- !u!114 &1093614319171760846
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using System;
 using Core.Enemy.Agents;
 using Core.Pool;
 using UnityEngine;
@@ -11,8 +10,7 @@ namespace Core.Enemy
         [SerializeField] private EnemyPositions _enemyPositions;
 
         private MonoPool<Enemy> _enemyPool;
-
-
+        
         private void Awake()
         {
             _enemyPool = new MonoPool<Enemy>(Prefab, Size, Container);

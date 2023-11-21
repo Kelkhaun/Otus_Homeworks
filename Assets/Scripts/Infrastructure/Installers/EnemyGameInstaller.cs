@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Infrastructure.Installers
 {
-    public sealed class EnemyGameListenerInstaller : MonoBehaviour, IInstaller
+    public sealed class EnemyGameInstaller : MonoBehaviour, IInstaller
     {
-        [SerializeField] private EnemyManager _enemyManager;
+        [SerializeField] private EnemySpawnController _enemyGameInstaller;
 
         public IEnumerable<IGameListener> Install()
         {
-            yield return _enemyManager;
+            yield return _enemyGameInstaller;
         }
     }
 }

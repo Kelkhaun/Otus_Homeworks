@@ -1,3 +1,4 @@
+using Core.Bullets;
 using Core.Components;
 using UnityEngine;
 
@@ -7,12 +8,19 @@ namespace Core.Enemy.Agents
     {
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private EnemyMoveAgent _moveAgent;
+        [SerializeField] private BulletConfig _bulletConfig;
+
         [SerializeField] private float _countdown;
 
         private Transform _target;
+        private float _force = 2.0f;
         private float _currentTime;
+        private BulletSystem _buleltSystem;
 
-        public event FireHandler OnFire = delegate { };
+        public void Construct(BulletSystem bulletSystem)
+        {
+            _buleltSystem = bulletSystem;
+        }
 
         public void SetTarget(Transform target)
         {
@@ -36,7 +44,7 @@ namespace Core.Enemy.Agents
                 return;
             }
 
-            _currentTime -= Time.fixedDeltaTime;
+            _currentTime -= deltaTime;
 
             if (_currentTime <= 0)
             {
@@ -50,7 +58,20 @@ namespace Core.Enemy.Agents
             var startPosition = _weaponComponent.Position;
             var vector = (Vector2) _target.transform.position - startPosition;
             var direction = vector.normalized;
-            OnFire.Invoke(gameObject, startPosition, direction);
+            OnFire(startPosition, direction);
+        }
+
+        private void OnFire(Vector2 position, Vector2 direction)
+        {
+            _buleltSystem.Fire(new BulletSystem.Args
+            {
+                IsPlayer = false,
+                PhysicsLayer = (int) _bulletConfig.PhysicsLayer,
+                Color = _bulletConfig.Color,
+                Damage = _bulletConfig.Damage,
+                Position = position,
+                Velocity = direction * _force
+            });
         }
     }
 }

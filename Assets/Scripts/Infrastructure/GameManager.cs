@@ -45,12 +45,12 @@ namespace Infrastructure
 
             if (listener is IGameUpdateListener updateListener)
             {
-                _updateListeners.Add(updateListener);
+                _updateListeners.Remove(updateListener);
             }
 
             if (listener is IGameFixedUpdateListener fixedUpdateListener)
             {
-                _fixedUpdateListeners.Add(fixedUpdateListener);
+                _fixedUpdateListeners.Remove(fixedUpdateListener);
             }
         }
 

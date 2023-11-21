@@ -9,8 +9,8 @@ namespace Core.Bullets
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        public bool IsPlayer { get; private set; }
-        public int Damage { get; private set; }
+        private bool IsPlayer { get; set; }
+        private int Damage { get; set; }
 
         public event Action<Bullet, GameObject> OnCollisionEntered;
 

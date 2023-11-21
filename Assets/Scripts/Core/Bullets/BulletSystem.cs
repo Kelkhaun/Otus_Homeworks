@@ -18,6 +18,7 @@ namespace Core.Bullets
             _bulletPool = new MonoPool<Bullet>(Prefab, Size, Container);
         }
 
+
         public void OnFixedUpdate(float deltaTime)
         {
             _cacheBullets.Clear();
