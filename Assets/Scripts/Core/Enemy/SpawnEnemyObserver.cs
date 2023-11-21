@@ -9,7 +9,6 @@ namespace Core.Enemy
         [SerializeField] private GameObject _player;
         [SerializeField] private EnemyPool _enemyPool;
         [SerializeField] private GameManager _gameManager;
-        [SerializeField] private EnemyManager _enemyManager;
 
         public void OnStartGame()
         {
