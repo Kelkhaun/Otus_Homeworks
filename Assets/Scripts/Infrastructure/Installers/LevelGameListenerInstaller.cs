@@ -8,14 +8,9 @@ namespace Infrastructure.Installers
     {
         [SerializeField] private LevelBackground _levelBackground;
             
-        public List<IGameListener> Install()
+        public IEnumerable<IGameListener> Install()
         {
-            var listeners = new List<IGameListener>
-            {
-                _levelBackground,
-            };
-
-            return listeners;
+            yield return _levelBackground;
         }
     }
 }

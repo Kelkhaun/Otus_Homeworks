@@ -1,20 +1,27 @@
 ﻿using Infrastructure;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ui
 {
-    public sealed class StartGameButton : GameButton, IGameStartListener
+    public sealed class StartGameButton : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private DelayedGameStarter _delayedGameStarter;
+        [SerializeField] private GameLauncher gameLauncher;
+        [SerializeField] private Button _button;
 
-        protected override void OnButtonClicked()
+        public void OnStartGame()
         {
-            _delayedGameStarter.StartGame();
-            gameObject.SetActive(false);
+            _button.onClick.AddListener(OnButtonClicked);
         }
 
-        public new void OnStartGame()
+        public void OnFinishGame()
         {
+            _button.onClick.RemoveListener(OnButtonClicked);
+        }
+        
+        private void OnButtonClicked()
+        {
+            gameLauncher.StartGame();
             gameObject.SetActive(false);
         }
     }

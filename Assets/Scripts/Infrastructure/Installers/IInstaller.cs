@@ -4,6 +4,6 @@ namespace Infrastructure.Installers
 {
     public interface IInstaller
     {
-        List<IGameListener> Install();
+        IEnumerable<IGameListener> Install();
     }
 }

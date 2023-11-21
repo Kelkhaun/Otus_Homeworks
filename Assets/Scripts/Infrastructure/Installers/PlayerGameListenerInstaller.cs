@@ -11,16 +11,11 @@ namespace Infrastructure.Installers
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private PlayerDeathObserver _playerDeathObserver;
 
-        public List<IGameListener> Install()
+        public IEnumerable<IGameListener> Install()
         {
-            var listeners = new List<IGameListener>
-            {
-                _inputController,
-                _playerDeathObserver,
-                _keyboardInput
-            };
-
-            return listeners;
+            yield return _keyboardInput;
+            yield return _playerDeathObserver;
+            yield return _inputController;
         }
     }
 }

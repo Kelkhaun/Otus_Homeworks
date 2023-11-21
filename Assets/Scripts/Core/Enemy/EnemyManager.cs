@@ -49,7 +49,7 @@ namespace Core.Enemy
 
         private void OnFire(GameObject enemy, Vector2 position, Vector2 direction)
         {
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
+            _bulletSystem.Fire(new BulletSystem.Args
             {
                 IsPlayer = false,
                 PhysicsLayer = (int) _bulletConfig.PhysicsLayer,

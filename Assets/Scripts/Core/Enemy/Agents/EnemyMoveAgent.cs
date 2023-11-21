@@ -28,7 +28,7 @@ namespace Core.Enemy.Agents
             }
 
             var direction = vector.normalized * Time.fixedDeltaTime;
-            _moveComponent.OnMove(direction);
+            _moveComponent.Move(direction);
         }
 
         public void SetDestination(Vector2 endPoint)

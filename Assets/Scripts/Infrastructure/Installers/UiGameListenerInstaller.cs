@@ -8,9 +8,9 @@ namespace Infrastructure.Installers
     public sealed class UiGameListenerInstaller : MonoBehaviour, IInstaller
     {
         [SerializeField] private PauseButton _pauseButton;
-        [SerializeField] private GameButton _startGameButton;
+        [SerializeField] private StartGameButton _startGameButton;
 
-        public List<IGameListener> Install()
+        public IEnumerable<IGameListener> Install()
         {
             var listeners = new List<IGameListener>
             {

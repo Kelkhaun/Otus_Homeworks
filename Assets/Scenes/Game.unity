@@ -500,7 +500,6 @@ MonoBehaviour:
   _player: {fileID: 4414282821800802397}
   _enemyPool: {fileID: 562298207}
   _gameManager: {fileID: 3951702117947426123}
-  _enemyManager: {fileID: 562298205}
 --- !u!1 &724523277
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +665,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3951702117947426122}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &776543216
 MonoBehaviour:
@@ -682,50 +681,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameManager: {fileID: 3951702117947426123}
   _enemyManager: {fileID: 562298205}
---- !u!1 &855642916
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 855642917}
-  - component: {fileID: 855642918}
-  m_Layer: 0
-  m_Name: TimeScaleListener
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &855642917
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855642916}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3951702117947426122}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &855642918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855642916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4973e059be247929c3da71ef02cb1db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &883274639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1540253224}
-  _delayedGameStarter: {fileID: 3951702117947426125}
+  gameLauncher: {fileID: 3951702117947426125}
 --- !u!1 &1549378006
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,7 +1594,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3951702117947426122}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1923440880
 MonoBehaviour:
@@ -2113,7 +2068,6 @@ GameObject:
   - component: {fileID: 3951702117947426128}
   - component: {fileID: 3951702117947426131}
   - component: {fileID: 3951702117947426133}
-  - component: {fileID: 3951702117947426130}
   - component: {fileID: 3951702117947426132}
   m_Layer: 0
   m_Name: '[GAME_SYSTEM]'
@@ -2138,7 +2092,6 @@ Transform:
   - {fileID: 1134805360}
   - {fileID: 363245576}
   - {fileID: 562298204}
-  - {fileID: 855642917}
   - {fileID: 1923440879}
   - {fileID: 776543215}
   m_Father: {fileID: 0}
@@ -2202,7 +2155,6 @@ MonoBehaviour:
     - {fileID: 3951702117947426127}
     - {fileID: 3951702117947426128}
     - {fileID: 3951702117947426131}
-    - {fileID: 3951702117947426130}
     - {fileID: 3951702117947426133}
     - {fileID: 3951702117947426132}
     SerializedBytesString: 
@@ -2216,7 +2168,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 5
     - Name: 
       Entry: 10
       Data: 0
@@ -2232,9 +2184,6 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 4
-    - Name: 
-      Entry: 10
-      Data: 5
     - Name: 
       Entry: 13
       Data: 
@@ -2270,21 +2219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyManager: {fileID: 562298205}
   _spawnEnemyObserver: {fileID: 562298208}
-  _enemySpawnObserver: {fileID: 562298208}
   _enemyDeathObserver: {fileID: 776543216}
---- !u!114 &3951702117947426130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3951702117947426121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd4e5a064db4522a2f963d911686249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeScaleListener: {fileID: 855642918}
 --- !u!114 &3951702117947426131
 MonoBehaviour:
   m_ObjectHideFlags: 0

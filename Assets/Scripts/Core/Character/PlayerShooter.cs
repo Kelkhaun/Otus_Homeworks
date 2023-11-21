@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace Core.Character
 {
-    public sealed class PlayerFireListener : MonoBehaviour
+    public sealed class PlayerShooter : MonoBehaviour
     {
         [SerializeField] private WeaponComponent _characterWeapon;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
 
-        public void OnFire()
+        public void Fire()
         {
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
+            _bulletSystem.Fire(new BulletSystem.Args
             {
                 IsPlayer = true,
                 PhysicsLayer = (int) _bulletConfig.PhysicsLayer,

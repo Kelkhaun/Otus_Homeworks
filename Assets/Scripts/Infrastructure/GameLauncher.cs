@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Infrastructure
 {
-    public sealed class DelayedGameStarter : MonoBehaviour
+    public sealed class GameLauncher : MonoBehaviour
     {
         [SerializeField] private GameManager _gameManager;
         [SerializeField] private float _delay;

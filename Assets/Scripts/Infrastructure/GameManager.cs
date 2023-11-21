@@ -55,6 +55,7 @@ namespace Infrastructure
             }
 
             State = GameState.PLAYING;
+            Time.timeScale = 1;
         }
 
         [Button]
@@ -69,6 +70,7 @@ namespace Infrastructure
             }
 
             State = GameState.PAUSED;
+            Time.timeScale = 0;
         }
 
         [Button]
@@ -83,6 +85,7 @@ namespace Infrastructure
             }
 
             State = GameState.PLAYING;
+            Time.timeScale = 1;
         }
 
         [Button]
@@ -97,6 +100,7 @@ namespace Infrastructure
             }
 
             State = GameState.FINISHED;
+            Time.timeScale = 0;
         }
 
         private void Update()

@@ -17,7 +17,7 @@ namespace Infrastructure
 
             for (int i = 0; i < _listeners.Count; i++)
             {
-                List<IGameListener> gameListener = _listeners[i].Install();
+                IEnumerable<IGameListener> gameListener = _listeners[i].Install();
 
                 foreach (var listener in gameListener)
                 {

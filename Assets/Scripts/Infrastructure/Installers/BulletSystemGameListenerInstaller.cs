@@ -8,14 +8,9 @@ namespace Infrastructure.Installers
     {
         [SerializeField] private BulletSystem _bulletSystem;
             
-        public List<IGameListener> Install()
+        public IEnumerable<IGameListener> Install()
         {
-            var listeners = new List<IGameListener>
-            {
-                _bulletSystem,
-            };
-
-            return listeners;
+            yield return _bulletSystem;
         }
     }
 }

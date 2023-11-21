@@ -47,7 +47,7 @@ namespace Core.Bullets
             ActiveObject.Remove(bullet);
         }
 
-        public void FlyBulletByArgs(Args args)
+        public void Fire(Args args)
         {
             Bullet bullet = _bulletPool.Get();
             bullet.transform.SetParent(WorldTransform);

@@ -9,17 +9,12 @@ namespace Infrastructure.Installers
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private SpawnEnemyObserver _spawnEnemyObserver;
         [SerializeField] private EnemyDeathObserver _enemyDeathObserver;
-    
-        public List<IGameListener> Install()
-        {
-            var listeners = new List<IGameListener>
-            {
-                _enemyManager,
-                _spawnEnemyObserver,
-                _enemyDeathObserver
-            };
 
-            return listeners;
+        public IEnumerable<IGameListener> Install()
+        {
+            yield return _enemyManager;
+            yield return _spawnEnemyObserver;
+            yield return _enemyDeathObserver;
         }
     }
 }

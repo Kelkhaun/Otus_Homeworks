@@ -1,18 +1,30 @@
 ﻿using Infrastructure;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ui
 {
-    public sealed class PauseButton : GameButton
+    public sealed class PauseButton : MonoBehaviour, IGameStartListener, IGameFinishListener
     {
         [SerializeField] private GameManager _gameManager;
+        [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _text;
 
         private string _resume = "Продолжить";
         private string _pause = "Пауза";
+        
+        public void OnStartGame()
+        {
+            _button.onClick.AddListener(OnButtonClicked);
+        }
 
-        protected override void OnButtonClicked()
+        public void OnFinishGame()
+        {
+            _button.onClick.RemoveListener(OnButtonClicked);
+        }
+
+        private void OnButtonClicked()
         {
             if (_gameManager.State == GameState.PAUSED)
             {
