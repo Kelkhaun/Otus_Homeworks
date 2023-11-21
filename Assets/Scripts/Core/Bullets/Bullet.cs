@@ -1,4 +1,5 @@
 using System;
+using Core.Components;
 using UnityEngine;
 
 namespace Core.Bullets
@@ -46,6 +47,24 @@ namespace Core.Bullets
         public void SetIsPlayer(bool isPlayer)
         {
             IsPlayer = isPlayer;
+        }
+
+        public void TryTakeDamage(GameObject collisionObject)
+        {
+            if (!collisionObject.TryGetComponent(out TeamComponent team))
+            {
+                return;
+            }
+
+            if (IsPlayer == team.IsPlayer)
+            {
+                return;
+            }
+
+            if (collisionObject.TryGetComponent(out HitPointsComponent hitPoints))
+            {
+                hitPoints.TakeDamage(Damage);
+            }
         }
     }
 }

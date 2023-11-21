@@ -3,6 +3,7 @@ using System.Collections;
 using Core.Bullets;
 using Core.Components;
 using Core.Enemy.Agents;
+using Infrastructure;
 using UnityEngine;
 
 namespace Core.Enemy
@@ -12,6 +13,8 @@ namespace Core.Enemy
         [SerializeField] private EnemyPool _enemyPool;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
+        [SerializeField] private GameManager _gameManager;
+        [SerializeField] private Transform _playerTarget;
 
         private Coroutine _spawnEnemyRoutine;
         private int _timeBetweenSpawn = 1;
@@ -38,7 +41,8 @@ namespace Core.Enemy
             if (_enemyPool.RemoveActiveEnemy(enemyComponent))
             {
                 EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
-                
+
+                enemyComponent.Disable();
                 OnEnemyDying?.Invoke(enemyComponent);
                 enemyAttackAgent.OnFire -= OnFire;
                 enemy.GetComponent<HitPointsComponent>().OnEnemyDying -= OnDestroyed;
@@ -67,13 +71,16 @@ namespace Core.Enemy
                 yield return new WaitForSeconds(_timeBetweenSpawn);
                 Enemy enemy = _enemyPool.Get();
 
+                enemy.Construct(_gameManager, _playerTarget);
+                enemy.Enable();
+
                 if (_enemyPool.AddActiveEnemy(enemy))
                 {
                     EnemyAttackAgent enemyAttackAgent = enemy.GetComponent<EnemyAttackAgent>();
-                    
+
                     OnEnemySpawn?.Invoke(enemy);
                     enemyAttackAgent.OnFire += OnFire;
-                    enemy.GetComponent<HitPointsComponent>().OnEnemyDying += OnDestroyed; 
+                    enemy.GetComponent<HitPointsComponent>().OnEnemyDying += OnDestroyed;
                 }
             }
         }

@@ -12,7 +12,6 @@ namespace Core.Enemy
 
         private MonoPool<Enemy> _enemyPool;
 
-        public event Action<Enemy> OnEnemySpawned;
 
         private void Awake()
         {
@@ -36,7 +35,6 @@ namespace Core.Enemy
             enemy.transform.position = spawnPosition.position;
             var attackPosition = _enemyPositions.RandomAttackPosition();
             enemy.GetComponent<EnemyMoveAgent>().SetDestination(attackPosition.position);
-            OnEnemySpawned?.Invoke(enemy);
         }
 
         public override Enemy Get()

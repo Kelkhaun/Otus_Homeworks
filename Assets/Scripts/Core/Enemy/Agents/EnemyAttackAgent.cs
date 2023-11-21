@@ -9,12 +9,12 @@ namespace Core.Enemy.Agents
         [SerializeField] private EnemyMoveAgent _moveAgent;
         [SerializeField] private float _countdown;
 
-        private GameObject _target;
+        private Transform _target;
         private float _currentTime;
 
         public event FireHandler OnFire = delegate { };
 
-        public void SetTarget(GameObject target)
+        public void SetTarget(Transform target)
         {
             _target = target;
         }

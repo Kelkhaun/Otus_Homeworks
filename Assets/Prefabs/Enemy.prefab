@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5573b1e5904417fa2b8f1ca7dfb48b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyAttackAgent: {fileID: 6896809305229427933}
 --- !u!1 &2239154907127902911
 GameObject:
   m_ObjectHideFlags: 0

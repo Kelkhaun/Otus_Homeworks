@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -41,6 +42,16 @@ namespace Infrastructure
             }
 
             _listeners.Remove(listener);
+
+            if (listener is IGameUpdateListener updateListener)
+            {
+                _updateListeners.Add(updateListener);
+            }
+
+            if (listener is IGameFixedUpdateListener fixedUpdateListener)
+            {
+                _fixedUpdateListeners.Add(fixedUpdateListener);
+            }
         }
 
         [Button]
@@ -56,6 +67,22 @@ namespace Infrastructure
 
             State = GameState.PLAYING;
             Time.timeScale = 1;
+        }
+
+        public void AddListeners(IGameListener[] listeners)
+        {
+            foreach (var listener in listeners)
+            {
+                AddListener(listener);
+            }
+        }
+
+        public void RemoveListeners(IGameListener[] listeners)
+        {
+            foreach (var listener in listeners)
+            {
+                RemoveListener(listener);
+            }
         }
 
         [Button]

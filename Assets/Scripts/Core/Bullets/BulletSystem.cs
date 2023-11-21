@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core.Components;
 using Core.Level;
 using Core.Pool;
 using UnityEngine;
@@ -65,21 +64,7 @@ namespace Core.Bullets
         private void OnCollisionEntered(Bullet bullet, GameObject collisionObject)
         {
             Release(bullet);
-
-            if (!collisionObject.TryGetComponent(out TeamComponent team))
-            {
-                return;
-            }
-
-            if (bullet.IsPlayer == team.IsPlayer)
-            {
-                return;
-            }
-
-            if (collisionObject.TryGetComponent(out HitPointsComponent hitPoints))
-            {
-                hitPoints.TakeDamage(bullet.Damage);
-            }
+            bullet.TryTakeDamage(collisionObject);
         }
 
         public struct Args
