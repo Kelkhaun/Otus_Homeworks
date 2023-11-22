@@ -5,20 +5,12 @@ using UnityEngine;
 
 namespace Core.Bullets
 {
-    public sealed class BulletSystem : Pool<Bullet>, IGameFixedUpdateListener
+    public sealed class BulletSystem : MonoPool<Bullet>, IGameFixedUpdateListener
     {
         [SerializeField] private LevelBounds _levelBounds;
 
         private readonly List<Bullet> _cacheBullets = new();
-
-        private MonoPool<Bullet> _bulletPool;
-
-        private void Awake()
-        {
-            _bulletPool = new MonoPool<Bullet>(Prefab, Size, Container);
-        }
-
-
+        
         public void OnFixedUpdate(float deltaTime)
         {
             _cacheBullets.Clear();
@@ -30,14 +22,9 @@ namespace Core.Bullets
 
                 if (!_levelBounds.IsBounds(bullet.transform.position))
                 {
-                    Release(bullet);
+                    base.Release(bullet);
                 }
             }
-        }
-
-        public override Bullet Get()
-        {
-            return _bulletPool.Get();
         }
 
         public override void Release(Bullet bullet)
@@ -49,7 +36,7 @@ namespace Core.Bullets
 
         public void Fire(Args args)
         {
-            Bullet bullet = _bulletPool.Get();
+            Bullet bullet = Get();
             bullet.transform.SetParent(WorldTransform);
             bullet.SetPosition(args.Position);
             bullet.SetColor(args.Color);

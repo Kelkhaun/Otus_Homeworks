@@ -3,42 +3,42 @@ using UnityEngine;
 
 namespace Core.Pool
 {
-    public sealed class MonoPool<T> where T : MonoBehaviour
+    public abstract class MonoPool<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private readonly T _prefab;
-        private readonly Transform _container;
-        private readonly Queue<T> _pool;
+        [Header("Pool")] [SerializeField] protected T Prefab;
+        [SerializeField] protected int Size;
+        [SerializeField] protected Transform Container;
+        [SerializeField] protected Transform WorldTransform;
 
-        public MonoPool(T prefab, int size, Transform container)
+        protected readonly Queue<T> Pool = new();
+        protected readonly HashSet<T> ActiveObject = new();
+
+        private void Awake()
         {
-            _prefab = prefab;
-            _container = container;
-            _pool = new Queue<T>(size);
-
-            for (var i = 0; i < size; i++)
+            for (var i = 0; i < Size; i++)
             {
-                _pool.Enqueue(CreateObject());
+                Pool.Enqueue(CreateObject());
             }
         }
-
-        public T Get()
+    
+        public virtual T Get()
         {
-            if (_pool.TryDequeue(out T obj))
+            if (Pool.TryDequeue(out T gameObject))
             {
-                return obj;
+                return gameObject;
             }
 
             return CreateObject();
         }
 
-        private T CreateObject()
+        public virtual void Release(T gameObject)
         {
-            return Object.Instantiate(_prefab, _container);
+            Pool.Enqueue(gameObject);
         }
 
-        public void Release(T item)
+        private T CreateObject()
         {
-            _pool.Enqueue(item);
+            return Instantiate(Prefab, Container);
         }
     }
 }
