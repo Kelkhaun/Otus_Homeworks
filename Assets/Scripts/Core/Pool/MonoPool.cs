@@ -12,8 +12,7 @@ namespace Core.Pool
 
         protected readonly Queue<T> Pool = new();
         protected readonly HashSet<T> ActiveObject = new();
-
-        private Enemy.Enemy enemy;
+        
         private void Awake()
         {
             for (var i = 0; i < Size; i++)

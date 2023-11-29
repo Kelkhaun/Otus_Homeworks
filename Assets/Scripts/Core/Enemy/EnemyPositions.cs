@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core.Enemy
 {
-    public sealed class EnemyPositions : MonoBehaviour
+    [Serializable]
+    public sealed class EnemyPositions
     {
         [SerializeField] private Transform[] _spawnPositions;
         [SerializeField] private Transform[] _attackPositions;

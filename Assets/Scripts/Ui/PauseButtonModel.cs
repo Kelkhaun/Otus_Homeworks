@@ -1,28 +1,26 @@
-﻿using Infrastructure;
+﻿using System;
 using Infrastructure.GameSystem;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Ui
 {
-    public sealed class PauseButton : MonoBehaviour, IGameStartListener, IGameFinishListener
+    [Serializable]
+    public sealed class PauseButtonModel : IGameStartListener, IGameFinishListener
     {
         [SerializeField] private GameManager _gameManager;
-        [SerializeField] private Button _button;
-        [SerializeField] private TMP_Text _text;
+        [SerializeField] private ButtonView _button;
 
         private string _resume = "Продолжить";
         private string _pause = "Пауза";
         
         public void OnStartGame()
         {
-            _button.onClick.AddListener(OnButtonClicked);
+            _button.Button.onClick.AddListener(OnButtonClicked);
         }
 
         public void OnFinishGame()
         {
-            _button.onClick.RemoveListener(OnButtonClicked);
+            _button.Button.onClick.RemoveListener(OnButtonClicked);
         }
 
         private void OnButtonClicked()
@@ -30,12 +28,12 @@ namespace Ui
             if (_gameManager.State == GameState.PAUSED)
             {
                 _gameManager.ResumeGame();
-                _text.SetText(_pause);
+                _button.Text.SetText(_pause);
             }
             else if (_gameManager.State == GameState.PLAYING)
             {
                 _gameManager.PauseGame();
-                _text.SetText(_resume);
+                _button.Text.SetText(_resume);
             }
         }
     }

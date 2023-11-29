@@ -1,14 +1,19 @@
 using Core.Enemy.Agents;
 using Core.Pool;
-using UnityEngine;
+using Infrastructure.DI;
 
 namespace Core.Enemy
 {
     public sealed class EnemyPool : MonoPool<Enemy>
     {
-        [Header("Spawn")]
-        [SerializeField] private EnemyPositions _enemyPositions;
+       private EnemyPositions _enemyPositions;
 
+        [Inject]
+        public void Construct(EnemyPositions enemyPositions)
+        {
+            _enemyPositions = enemyPositions;
+        }
+        
         public bool AddActiveEnemy(Enemy enemy)
         {
             return ActiveObject.Add(enemy);

@@ -1,17 +1,18 @@
-﻿using Core.Bullets;
+﻿using System;
+using Core.Bullets;
 using Infrastructure.GameSystem;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Core.Enemy
 {
-    public class EnemyFactory : MonoBehaviour
+    [Serializable]
+    public class EnemyFactory
     {
-        [SerializeField] private EnemyPool _enemyPool;
         [SerializeField] private GameManager _gameManager;
         [SerializeField] private BulletSystem _bulletSystem;
-      [ShowInInspector]  [SerializeField] private Transform _playerTarget;
-
+        [SerializeField] private EnemyPool _enemyPool;
+        [SerializeField] private Transform _playerTarget;
+        
         public Enemy GetEnemy()
         {
             Enemy enemy = _enemyPool.Get();

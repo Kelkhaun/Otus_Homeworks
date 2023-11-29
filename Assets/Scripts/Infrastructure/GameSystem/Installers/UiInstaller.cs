@@ -5,7 +5,7 @@ namespace Infrastructure.GameSystem.Installers
 {
     public sealed class UiInstaller : GameInstaller
     {
-        [SerializeField] [Listener] private PauseButton _pauseButton;
-        [SerializeField] [Listener] private StartGameButton _startGameButton;
+        [SerializeField] [Listener] private PauseButtonModel _pauseButton;
+        [SerializeField] [Listener] private StartGameButtonModel _startGameButton;
     }
 }

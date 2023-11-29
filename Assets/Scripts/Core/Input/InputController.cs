@@ -1,28 +1,26 @@
-using System;
 using Core.Character;
 using Core.Components;
 using Infrastructure.DI;
 using Infrastructure.GameSystem;
-using UnityEngine;
 
 namespace Core.Input
 {
-    [Serializable]
     public sealed class InputController :
         IGameStartListener,
         IGameFinishListener,
         IGamePauseListener,
         IGameResumeListener
     {
-        [SerializeField] private KeyboardInput _keyboardInput;
-        [SerializeField] private MoveComponent _moveComponent;
-        
+        private KeyboardInput _keyboardInput;
+        private MoveComponent _moveComponent;
         private PlayerShooter _playerShooter;
 
         [Inject]
-        public void Construct(PlayerShooter playerShooter)
+        public void Construct(PlayerShooter playerShooter, KeyboardInput keyboardInput, MoveComponent moveComponent)
         {
+            _moveComponent = moveComponent;
             _playerShooter = playerShooter;
+            _keyboardInput = keyboardInput;
         }
 
         public void OnStartGame() => Subscribe();

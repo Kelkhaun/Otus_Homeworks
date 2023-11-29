@@ -1,12 +1,22 @@
+using System;
 using Core.Components;
+using Infrastructure.DI;
 using UnityEngine;
 
 namespace Core.Enemy
 {
-    public sealed class EnemyManager : MonoBehaviour
+    [Serializable]
+    public sealed class EnemyManager
     {
-        [SerializeField] private EnemyPool _enemyPool;
-        [SerializeField] private EnemyFactory _enemyFactory;
+        private EnemyPool _enemyPool;
+        private EnemyFactory _enemyFactory;
+
+        [Inject]
+        public void Construct(EnemyFactory enemyFactory, EnemyPool enemyPool)
+        {
+            _enemyFactory = enemyFactory;
+            _enemyPool = enemyPool;
+        }
 
         public void Spawn()
         {

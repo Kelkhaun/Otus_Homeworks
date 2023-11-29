@@ -1,34 +1,46 @@
-﻿using System.Collections;
+﻿using System;
+using Infrastructure.DI;
 using Infrastructure.GameSystem;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Core.Enemy
 {
-    public sealed class EnemySpawnController : MonoBehaviour, IGameStartListener, IGameFinishListener
+    [Serializable]
+    public sealed class EnemySpawnController : IGameStartListener, IGameFinishListener, IGameUpdateListener
     {
-        [SerializeField] private EnemyManager _enemyManager;
-
-        private Coroutine _spawnEnemyRoutine;
+        private EnemyManager _enemyManager;
         private int _timeBetweenSpawn = 1;
+        private float _elapsedTime;
         private bool _canSpawn = true;
+
+        [Inject]
+        public void Construct(EnemyManager enemyManager)
+        {
+            _enemyManager = enemyManager;
+        }
 
         public void OnStartGame()
         {
-            _spawnEnemyRoutine = StartCoroutine(SpawnEnemyRoutine());
+            _canSpawn = true;
         }
 
         public void OnFinishGame()
         {
-            StopCoroutine(_spawnEnemyRoutine);
+            _canSpawn = false;
         }
 
-        private IEnumerator SpawnEnemyRoutine()
+        public void OnUpdate(float deltaTime)
         {
-            while (_canSpawn)
+            if (!_canSpawn)
             {
-                yield return new WaitForSeconds(_timeBetweenSpawn);
+                return;
+            }
+            
+            _elapsedTime += deltaTime;
+
+            if (_elapsedTime > _timeBetweenSpawn)
+            {
                 _enemyManager.Spawn();
+                _elapsedTime = 0;
             }
         }
     }

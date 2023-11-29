@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Core.Input
 {
-    public sealed class KeyboardInput : MonoBehaviour, IGameUpdateListener
+    [Serializable]
+    public sealed class KeyboardInput : IGameUpdateListener
     {
         [SerializeField] private KeyCode _shootKey = KeyCode.Space;
         [SerializeField] private KeyCode _leftKey = KeyCode.LeftArrow;
