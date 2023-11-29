@@ -6,14 +6,16 @@ namespace Core.Enemy
 {
     public sealed class EnemyPool : MonoPool<Enemy>
     {
-       private EnemyPositions _enemyPositions;
+        private EnemyPositions _enemyPositions;
+        private EnemyFactory _enemyFactory;
 
         [Inject]
-        public void Construct(EnemyPositions enemyPositions)
+        public void Construct(EnemyPositions enemyPositions, EnemyFactory enemyFactory)
         {
             _enemyPositions = enemyPositions;
+            _enemyFactory = enemyFactory;
         }
-        
+
         public bool AddActiveEnemy(Enemy enemy)
         {
             return ActiveObject.Add(enemy);
@@ -24,9 +26,15 @@ namespace Core.Enemy
             return ActiveObject.Remove(enemy);
         }
 
+        protected override Enemy CreateObject()
+        {
+            return _enemyFactory.Create(Container);
+        }
+
         public override Enemy Get()
         {
             Enemy enemy = base.Get();
+            enemy.Enable();
             InitializeEnemy(enemy);
 
             return enemy;
@@ -35,6 +43,7 @@ namespace Core.Enemy
         public override void Release(Enemy enemy)
         {
             base.Release(enemy);
+            enemy.Disable();
             enemy.transform.SetParent(Container);
         }
 

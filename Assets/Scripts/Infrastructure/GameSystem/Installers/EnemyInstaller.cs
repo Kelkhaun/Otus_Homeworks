@@ -7,8 +7,8 @@ namespace Infrastructure.GameSystem.Installers
     {
         [SerializeField] [Service(typeof(EnemyFactory))] private EnemyFactory _enemyFactory = new();
         [SerializeField] [Service(typeof(EnemyPool))]private EnemyPool _enemyPool;
-        [Listener] private EnemySpawnController _enemySpawnController = new();
-        [Listener] [Service(typeof(EnemyManager))] private EnemyManager _enemyManager;
+        [SerializeField][Listener] private EnemySpawnController _enemySpawnController = new();
+        [SerializeField][Listener] [Service(typeof(EnemyManager))] private EnemyManager _enemyManager;
         [SerializeField] [Listener][Service(typeof(EnemyPositions))] private EnemyPositions _enemyPositions = new();
     }
 }

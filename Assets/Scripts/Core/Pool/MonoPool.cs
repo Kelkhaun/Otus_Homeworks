@@ -13,7 +13,7 @@ namespace Core.Pool
         protected readonly Queue<T> Pool = new();
         protected readonly HashSet<T> ActiveObject = new();
         
-        private void Awake()
+        private void Start()
         {
             for (var i = 0; i < Size; i++)
             {
@@ -21,7 +21,6 @@ namespace Core.Pool
             }
 
             Pool.Dequeue();
-
         }
     
         public virtual T Get()
@@ -39,7 +38,7 @@ namespace Core.Pool
             Pool.Enqueue(gameObject);
         }
 
-        private T CreateObject()
+        protected virtual T CreateObject()
         {
             return Instantiate(Prefab, Container);
         }

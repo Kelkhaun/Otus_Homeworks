@@ -9,18 +9,16 @@ namespace Core.Enemy
     public sealed class EnemyManager
     {
         private EnemyPool _enemyPool;
-        private EnemyFactory _enemyFactory;
 
         [Inject]
-        public void Construct(EnemyFactory enemyFactory, EnemyPool enemyPool)
+        public void Construct(EnemyPool enemyPool)
         {
-            _enemyFactory = enemyFactory;
             _enemyPool = enemyPool;
         }
 
         public void Spawn()
         {
-            Enemy enemy = _enemyFactory.GetEnemy();
+            Enemy enemy = _enemyPool.Get();
 
             if (_enemyPool.AddActiveEnemy(enemy))
             {
@@ -31,7 +29,6 @@ namespace Core.Enemy
         private void OnDestroyed(GameObject enemy)
         {
             Enemy enemyComponent = enemy.GetComponent<Enemy>();
-            enemyComponent.Disable();
 
             if (_enemyPool.RemoveActiveEnemy(enemyComponent))
             {

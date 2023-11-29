@@ -1438,8 +1438,8 @@ MonoBehaviour:
   _enemyFactory:
     _gameManager: {fileID: 2018669174}
     _bulletSystem: {fileID: 891140016}
-    _enemyPool: {fileID: 1029225746}
     _playerTarget: {fileID: 4414282821800802396}
+    _enemyPrefab: {fileID: 1093614319171760846, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
   _enemyPool: {fileID: 1029225746}
   _enemyPositions:
     _spawnPositions:

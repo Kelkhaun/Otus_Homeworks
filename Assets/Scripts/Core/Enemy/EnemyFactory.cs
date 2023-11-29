@@ -2,6 +2,7 @@
 using Core.Bullets;
 using Infrastructure.GameSystem;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Core.Enemy
 {
@@ -10,16 +11,13 @@ namespace Core.Enemy
     {
         [SerializeField] private GameManager _gameManager;
         [SerializeField] private BulletSystem _bulletSystem;
-        [SerializeField] private EnemyPool _enemyPool;
         [SerializeField] private Transform _playerTarget;
-        
-        public Enemy GetEnemy()
+        [SerializeField] private Enemy _enemyPrefab;
+
+        public Enemy Create(Transform container)
         {
-            Enemy enemy = _enemyPool.Get();
-
+            Enemy enemy = Object.Instantiate(_enemyPrefab, container);
             enemy.Construct(_gameManager, _playerTarget, _bulletSystem);
-            enemy.Enable();
-
             return enemy;
         }
     }
