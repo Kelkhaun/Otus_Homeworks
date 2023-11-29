@@ -1,6 +1,7 @@
 using System;
 using Core.Bullets;
 using Core.Components;
+using Infrastructure.DI;
 using UnityEngine;
 
 namespace Core.Character
@@ -9,9 +10,16 @@ namespace Core.Character
     public sealed class PlayerShooter
     {
         [SerializeField] private WeaponComponent _characterWeapon;
-        [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
+        
+        private BulletSystem _bulletSystem;
 
+        [Inject]
+        public void Construct(BulletSystem bulletSystem)
+        {
+            _bulletSystem = bulletSystem;
+        }
+        
         public void Fire()
         {
             _bulletSystem.Fire(new BulletSystem.Args

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Infrastructure.Locator
 {
-    public class ServiceLocator : MonoBehaviour
+    public sealed class ServiceLocator : MonoBehaviour
     {
        private readonly Dictionary<Type, object> _services = new();
 

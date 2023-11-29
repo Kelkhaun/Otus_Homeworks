@@ -512,7 +512,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 891140017}
-  - component: {fileID: 891140016}
   m_Layer: 0
   m_Name: BulletSystem
   m_TagString: Untagged
@@ -520,22 +519,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &891140016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891140015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37bd15923a144ffbab0333dc6e74e641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
-  Size: 50
-  Container: {fileID: 891260888}
-  WorldTransform: {fileID: 1683128698}
 --- !u!4 &891140017
 Transform:
   m_ObjectHideFlags: 0
@@ -562,7 +545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 891260888}
   m_Layer: 0
-  m_Name: Pool
+  m_Name: BulletPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,7 +558,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891260887}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -694,7 +677,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1029225747}
-  - component: {fileID: 1029225746}
   m_Layer: 0
   m_Name: EnemySystem
   m_TagString: Untagged
@@ -702,22 +684,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1029225746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029225742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdcdf257e0242258e7a67fe13d80e5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Prefab: {fileID: 1093614319171760846, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
-  Size: 7
-  Container: {fileID: 1458732200}
-  WorldTransform: {fileID: 1683128698}
 --- !u!4 &1029225747
 Transform:
   m_ObjectHideFlags: 0
@@ -837,7 +803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1458732200}
   m_Layer: 0
-  m_Name: Pool
+  m_Name: EnemyPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -850,7 +816,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458732199}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1422,7 +1388,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ec2ff623884aee81a38a00d90bf185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSystem: {fileID: 891140016}
+  _bulletSystem:
+    Prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
+    Size: 30
+    Container: {fileID: 891260888}
+    WorldTransform: {fileID: 1683128698}
 --- !u!114 &2018669167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,10 +1407,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyFactory:
     _gameManager: {fileID: 2018669174}
-    _bulletSystem: {fileID: 891140016}
     _playerTarget: {fileID: 4414282821800802396}
     _enemyPrefab: {fileID: 1093614319171760846, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
-  _enemyPool: {fileID: 1029225746}
+  _enemyPool:
+    Prefab: {fileID: 1093614319171760846, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
+    Size: 30
+    Container: {fileID: 1458732200}
+    WorldTransform: {fileID: 1683128698}
   _enemyPositions:
     _spawnPositions:
     - {fileID: 5098186055898699330}
@@ -1501,7 +1474,6 @@ MonoBehaviour:
     _gameManager: {fileID: 2018669174}
   _playerShooter:
     _characterWeapon: {fileID: 4414282821800802400}
-    _bulletSystem: {fileID: 891140016}
     _bulletConfig: {fileID: 11400000, guid: 7138ae5d32d814e0ca50c616c65ea105, type: 2}
 --- !u!114 &2018669170
 MonoBehaviour:
@@ -1542,11 +1514,11 @@ MonoBehaviour:
   _serviceLocator: {fileID: 2018669172}
   _isInjectGameObjectsOnScene: 0
   _modules:
+  - {fileID: 2018669170}
   - {fileID: 2018669169}
   - {fileID: 2018669168}
-  - {fileID: 2018669166}
   - {fileID: 2018669167}
-  - {fileID: 2018669170}
+  - {fileID: 2018669166}
 --- !u!114 &2018669172
 MonoBehaviour:
   m_ObjectHideFlags: 0

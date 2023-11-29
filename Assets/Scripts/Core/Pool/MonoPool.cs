@@ -1,28 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Infrastructure.GameSystem;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Core.Pool
 {
-    public abstract class MonoPool<T> : MonoBehaviour where T : MonoBehaviour
+    [Serializable]
+    public abstract class MonoPool<T> : IGameStartListener where T : MonoBehaviour
     {
-        [Header("Pool")] [SerializeField] protected T Prefab;
+        [SerializeField] protected T Prefab;
         [SerializeField] protected int Size;
         [SerializeField] protected Transform Container;
         [SerializeField] protected Transform WorldTransform;
 
         protected readonly Queue<T> Pool = new();
         protected readonly HashSet<T> ActiveObject = new();
-        
-        private void Start()
+
+        public void OnStartGame()
         {
             for (var i = 0; i < Size; i++)
             {
                 Pool.Enqueue(CreateObject());
             }
-
-            Pool.Dequeue();
         }
-    
+        
         public virtual T Get()
         {
             if (Pool.TryDequeue(out T gameObject))
@@ -40,7 +42,7 @@ namespace Core.Pool
 
         protected virtual T CreateObject()
         {
-            return Instantiate(Prefab, Container);
+            return Object.Instantiate(Prefab, Container);
         }
     }
 }

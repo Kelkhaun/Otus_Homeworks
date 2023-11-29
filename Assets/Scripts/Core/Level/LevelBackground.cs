@@ -6,7 +6,9 @@ using UnityEngine;
 namespace Core.Level
 {
     [Serializable]
-    public sealed class LevelBackground : IGameStartListener,IGameFixedUpdateListener
+    public sealed class LevelBackground :
+        IGameStartListener,
+        IGameFixedUpdateListener
     {
         [SerializeField] private Params _params;
 
@@ -21,15 +23,14 @@ namespace Core.Level
         public void Construct(Transform levelBackgroundTransform)
         {
             _transform = levelBackgroundTransform;
-
         }
-        
+
         public void OnStartGame()
         {
             _startPositionY = _params.StartPositionY;
             _endPositionY = _params.EndPositionY;
             _movingSpeedY = _params.MovingSpeedY;
-            var position = _transform.position;
+            Vector3 position = _transform.position;
             _positionX = position.x;
             _positionZ = position.z;
         }

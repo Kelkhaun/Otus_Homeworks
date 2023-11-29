@@ -1,9 +1,11 @@
+using System;
 using Core.Enemy.Agents;
 using Core.Pool;
 using Infrastructure.DI;
 
 namespace Core.Enemy
 {
+    [Serializable]
     public sealed class EnemyPool : MonoPool<Enemy>
     {
         private EnemyPositions _enemyPositions;
@@ -15,7 +17,7 @@ namespace Core.Enemy
             _enemyPositions = enemyPositions;
             _enemyFactory = enemyFactory;
         }
-
+        
         public bool AddActiveEnemy(Enemy enemy)
         {
             return ActiveObject.Add(enemy);

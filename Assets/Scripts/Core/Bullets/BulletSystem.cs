@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Core.Level;
 using Core.Pool;
@@ -7,6 +8,7 @@ using UnityEngine;
 
 namespace Core.Bullets
 {
+    [Serializable]
     public sealed class BulletSystem : MonoPool<Bullet>, IGameFixedUpdateListener
     {
         private readonly List<Bullet> _cacheBullets = new();
@@ -30,13 +32,14 @@ namespace Core.Bullets
 
                 if (!_levelBounds.IsBounds(bullet.transform.position))
                 {
-                    base.Release(bullet);
+                    Release(bullet);
                 }
             }
         }
 
         public override void Release(Bullet bullet)
         {
+            base.Release(bullet);
             bullet.OnCollisionEntered -= OnCollisionEntered;
             bullet.transform.SetParent(Container);
             ActiveObject.Remove(bullet);
@@ -62,7 +65,7 @@ namespace Core.Bullets
             Release(bullet);
             bullet.TryTakeDamage(collisionObject);
         }
-
+        
         public struct Args
         {
             public Vector2 Position;

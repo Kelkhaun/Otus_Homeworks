@@ -10,7 +10,6 @@ namespace Core.Enemy.Agents
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private EnemyMoveAgent _moveAgent;
         [SerializeField] private BulletConfig _bulletConfig;
-
         [SerializeField] private float _countdown;
 
         private Transform _target;

@@ -5,6 +5,6 @@ namespace Infrastructure.GameSystem.Installers
 {
     public sealed class BulletSystemInstaller : GameInstaller
     {
-        [SerializeField] [Listener] private BulletSystem _bulletSystem;
+        [SerializeField] [Listener][Service(typeof(BulletSystem))] private BulletSystem _bulletSystem = new();
     }
 }
