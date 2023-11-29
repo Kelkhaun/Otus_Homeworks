@@ -1440,11 +1440,7 @@ MonoBehaviour:
     _bulletSystem: {fileID: 891140016}
     _enemyPool: {fileID: 1029225746}
     _playerTarget: {fileID: 4414282821800802396}
-  _enemyManager:
-    _enemyPool: {fileID: 1029225746}
-  _enemySpawnController:
-    _enemyManager:
-      _enemyPool: {fileID: 1029225746}
+  _enemyPool: {fileID: 1029225746}
   _enemyPositions:
     _spawnPositions:
     - {fileID: 5098186055898699330}
@@ -1465,7 +1461,6 @@ MonoBehaviour:
     - {fileID: 1549378007}
     - {fileID: 78117031}
     - {fileID: 883274640}
-  _enemyPool: {fileID: 1029225746}
 --- !u!114 &2018669168
 MonoBehaviour:
   m_ObjectHideFlags: 0
