@@ -1,10 +1,12 @@
+using System;
 using Core.Bullets;
 using Core.Components;
 using UnityEngine;
 
 namespace Core.Character
 {
-    public sealed class PlayerShooter : MonoBehaviour
+    [Serializable]
+    public sealed class PlayerShooter
     {
         [SerializeField] private WeaponComponent _characterWeapon;
         [SerializeField] private BulletSystem _bulletSystem;

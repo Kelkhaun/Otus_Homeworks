@@ -1,4 +1,4 @@
-﻿namespace Infrastructure
+namespace Infrastructure.GameSystem
 {
     public enum GameState
     {

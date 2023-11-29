@@ -1,28 +1,75 @@
+using System;
 using System.Collections.Generic;
-using Infrastructure.Installers;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
+using System.Reflection;
+using Infrastructure.DI;
+using Infrastructure.GameSystem;
+using Infrastructure.GameSystem.Installers;
+using Infrastructure.Locator;
 using UnityEngine;
 
 namespace Infrastructure
 {
-    [RequireComponent(typeof(GameManager))]
-    public sealed class GameInstaller : SerializedMonoBehaviour
+    public abstract class GameInstaller : MonoBehaviour,
+        IGameListenerProvider,
+        GameSystem.Installers.IServiceProvider,
+        IInjectProvider
     {
-        [OdinSerialize] List<IInstaller> _listeners = new();
-
-        private void Awake()
+        public virtual IEnumerable<IGameListener> ProvideListeners()
         {
-            var gameManager = GetComponent<GameManager>();
+            FieldInfo[] fields = GetType().GetFields
+            (
+                BindingFlags.Instance |
+                BindingFlags.NonPublic
+                | BindingFlags.Public
+                | BindingFlags.DeclaredOnly
+            );
 
-            for (int i = 0; i < _listeners.Count; i++)
+            foreach (var field in fields)
             {
-                IEnumerable<IGameListener> gameListener = _listeners[i].Install();
-
-                foreach (var listener in gameListener)
+                if (field.IsDefined(typeof(ListenerAttribute)) && field.GetValue(this) is IGameListener gameListener)
                 {
-                    gameManager.AddListener(listener);
+                    yield return gameListener;
                 }
+            }
+        }
+
+        public virtual IEnumerable<(Type, object)> ProvideServices()
+        {
+            FieldInfo[] fields = GetType().GetFields
+            (
+                BindingFlags.Instance |
+                BindingFlags.NonPublic
+                | BindingFlags.Public
+                | BindingFlags.DeclaredOnly
+            );
+
+            foreach (var field in fields)
+            {
+                var attribute = field.GetCustomAttribute<ServiceAttribute>();
+
+                if (attribute != null)
+                {
+                    var type = attribute.Contract;
+                    var service = field.GetValue(this);
+                    yield return (type, service);
+                }
+            }
+        }
+
+        public virtual void Inject(ServiceLocator serviceLocator)
+        {
+            FieldInfo[] fields = GetType().GetFields
+            (
+                BindingFlags.Instance |
+                BindingFlags.NonPublic
+                | BindingFlags.Public
+                | BindingFlags.DeclaredOnly
+            );
+
+            foreach (var field in fields)
+            {
+                var target = field.GetValue(this);
+                DependencyInjector.Inject(target, serviceLocator);
             }
         }
     }

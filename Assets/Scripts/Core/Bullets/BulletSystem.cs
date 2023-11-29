@@ -1,16 +1,24 @@
 using System.Collections.Generic;
 using Core.Level;
 using Core.Pool;
+using Infrastructure.DI;
+using Infrastructure.GameSystem;
 using UnityEngine;
 
 namespace Core.Bullets
 {
     public sealed class BulletSystem : MonoPool<Bullet>, IGameFixedUpdateListener
     {
-        [SerializeField] private LevelBounds _levelBounds;
-
         private readonly List<Bullet> _cacheBullets = new();
         
+        private LevelBounds _levelBounds;
+
+        [Inject]
+        public void Construct(LevelBounds levelBounds)
+        {
+            _levelBounds = levelBounds;
+        }
+
         public void OnFixedUpdate(float deltaTime)
         {
             _cacheBullets.Clear();

@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 namespace Core.Level
 {
-    public sealed class LevelBounds : MonoBehaviour
+    [Serializable]
+    public sealed class LevelBounds 
     {
         [SerializeField] private Transform _leftBorder;
         [SerializeField] private Transform _rightBorder;

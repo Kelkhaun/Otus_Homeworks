@@ -1,4 +1,5 @@
 using Core.Components;
+using Infrastructure.GameSystem;
 using UnityEngine;
 
 namespace Core.Enemy.Agents

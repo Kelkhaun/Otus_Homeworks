@@ -1,10 +1,10 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace Infrastructure
+namespace Infrastructure.GameSystem
 {
     public sealed class GameManager : SerializedMonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Infrastructure
         private readonly List<IGameFixedUpdateListener> _fixedUpdateListeners = new();
 
         [OdinSerialize] [ReadOnly] public GameState State { get; private set; }
-
+        
         public void AddListener(IGameListener listener)
         {
             if (listener == null)
@@ -69,7 +69,7 @@ namespace Infrastructure
             Time.timeScale = 1;
         }
 
-        public void AddListeners(IGameListener[] listeners)
+        public void AddListeners(IEnumerable<IGameListener> listeners)
         {
             foreach (var listener in listeners)
             {
@@ -77,7 +77,7 @@ namespace Infrastructure
             }
         }
 
-        public void RemoveListeners(IGameListener[] listeners)
+        public void RemoveListeners(IEnumerable<IGameListener> listeners)
         {
             foreach (var listener in listeners)
             {

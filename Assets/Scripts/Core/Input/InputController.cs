@@ -1,19 +1,29 @@
+using System;
 using Core.Character;
 using Core.Components;
+using Infrastructure.DI;
+using Infrastructure.GameSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Core.Input
 {
-    public sealed class InputController : MonoBehaviour, 
-        IGameStartListener, 
-        IGameFinishListener, 
-        IGamePauseListener, 
+    [Serializable]
+    public sealed class InputController :
+        IGameStartListener,
+        IGameFinishListener,
+        IGamePauseListener,
         IGameResumeListener
     {
         [SerializeField] private KeyboardInput _keyboardInput;
         [SerializeField] private MoveComponent _moveComponent;
-        [FormerlySerializedAs("_playerFireListener")] [SerializeField] private PlayerShooter playerShooter;
+        
+        private PlayerShooter _playerShooter;
+
+        [Inject]
+        public void Construct(PlayerShooter playerShooter)
+        {
+            _playerShooter = playerShooter;
+        }
 
         public void OnStartGame() => Subscribe();
 
@@ -26,13 +36,13 @@ namespace Core.Input
         private void Subscribe()
         {
             _keyboardInput.OnMove += _moveComponent.Move;
-            _keyboardInput.OnFire += playerShooter.Fire;
+            _keyboardInput.OnFire += _playerShooter.Fire;
         }
 
         private void Unsubscribe()
         {
             _keyboardInput.OnMove -= _moveComponent.Move;
-            _keyboardInput.OnFire -= playerShooter.Fire;
+            _keyboardInput.OnFire -= _playerShooter.Fire;
         }
     }
 }
