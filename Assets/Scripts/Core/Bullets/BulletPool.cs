@@ -26,7 +26,7 @@ namespace Core.Bullets
            ActiveObject.Add(bullet);
         }
 
-        public IEnumerable<Bullet> GetActiveObject()
+        public IEnumerable<Bullet> GetActiveObjects()
         {
             return ActiveObject;
         }

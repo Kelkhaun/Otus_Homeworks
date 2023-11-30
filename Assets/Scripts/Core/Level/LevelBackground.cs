@@ -1,5 +1,4 @@
 using System;
-using Infrastructure.DI;
 using Infrastructure.GameSystem;
 using UnityEngine;
 

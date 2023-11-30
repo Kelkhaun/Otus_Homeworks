@@ -25,7 +25,7 @@ namespace Core.Bullets
         public void OnFixedUpdate(float deltaTime)
         {
             _cacheBullets.Clear();
-            _cacheBullets.AddRange(_bulletPool.GetActiveObject());
+            _cacheBullets.AddRange(_bulletPool.GetActiveObjects());
 
             for (int i = 0, count = _cacheBullets.Count; i < count; i++)
             {
