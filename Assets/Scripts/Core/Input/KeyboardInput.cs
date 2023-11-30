@@ -1,4 +1,5 @@
 using System;
+using Infrastructure.DI;
 using Infrastructure.GameSystem;
 using UnityEngine;
 
@@ -7,28 +8,31 @@ namespace Core.Input
     [Serializable]
     public sealed class KeyboardInput : IGameUpdateListener
     {
-        [SerializeField] private KeyCode _shootKey = KeyCode.Space;
-        [SerializeField] private KeyCode _leftKey = KeyCode.LeftArrow;
-        [SerializeField] private KeyCode _rightKey = KeyCode.RightArrow;
-
+        private KeyboardMap _keyboardMap;
         private float _horizontalDirection;
 
         public event Action<Vector2> OnMove;
         public event Action OnFire;
+
+        [Inject]
+        private void Construct(KeyboardMap keyboardMap)
+        {
+            _keyboardMap = keyboardMap;
+        }
         
         public void OnUpdate(float deltaTime)
         {
-            if (UnityEngine.Input.GetKeyDown(_shootKey))
+            if (UnityEngine.Input.GetKeyDown(_keyboardMap.ShootKey))
             {
                 OnFire?.Invoke();
             }
 
-            if (UnityEngine.Input.GetKey(_leftKey))
+            if (UnityEngine.Input.GetKey(_keyboardMap.LeftKey))
             {
                 _horizontalDirection = -1;
                 OnMove?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
             }
-            else if (UnityEngine.Input.GetKey(_rightKey))
+            else if (UnityEngine.Input.GetKey(_keyboardMap.RightKey))
             {
                 _horizontalDirection = 1;
                 OnMove?.Invoke(new Vector2(_horizontalDirection, 0) * Time.fixedDeltaTime);
@@ -41,3 +45,4 @@ namespace Core.Input
         }
     }
 }
+

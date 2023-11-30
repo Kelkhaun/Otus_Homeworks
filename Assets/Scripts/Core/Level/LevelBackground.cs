@@ -18,11 +18,10 @@ namespace Core.Level
         private float _positionX;
         private float _positionZ;
         private Transform _transform;
-
-        [Inject]
-        public void Construct(Transform levelBackgroundTransform)
+        
+        public void Construct(Transform levelTransform)
         {
-            _transform = levelBackgroundTransform;
+            _transform = levelTransform;
         }
 
         public void OnStartGame()

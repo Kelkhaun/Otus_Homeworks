@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Components;
+using Infrastructure.DI;
 using Infrastructure.GameSystem;
 using UnityEngine;
 
@@ -8,9 +9,16 @@ namespace Core.Character
     [Serializable]
     public sealed class PlayerDeathObserver : IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private HitPointsComponent _playerHitPointsComponent;
-        [SerializeField] private GameManager _gameManager;
-
+        private HitPointsComponent _playerHitPointsComponent;
+        private GameManager _gameManager;
+        
+        [Inject]
+        private void Construct(GameManager gameManager, PlayerService playerService)
+        {
+            _gameManager = gameManager;
+            _playerHitPointsComponent = playerService.Player.GetComponent<HitPointsComponent>();
+        }
+        
         public void OnStartGame()
         {
             _playerHitPointsComponent.OnEnemyDying += OnPlayerDeath;

@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Bullets;
+using Core.Character;
 using Infrastructure.DI;
 using Infrastructure.GameSystem;
 using UnityEngine;
@@ -10,18 +11,20 @@ namespace Core.Enemy
     [Serializable]
     public class EnemyFactory
     {
-        [SerializeField] private GameManager _gameManager;
-        [SerializeField] private Transform _playerTarget;
         [SerializeField] private Enemy _enemyPrefab;
         
+        private GameManager _gameManager;
+        private Transform _playerTarget;
         private BulletSystem _bulletSystem;
 
         [Inject]
-        public void Construct(BulletSystem bulletSystem)
+        public void Construct(BulletSystem bulletSystem, PlayerService playerService, GameManager gameManager)
         {
             _bulletSystem = bulletSystem;
+            _gameManager = gameManager;
+            _playerTarget = playerService.Player.transform;
         }
-        
+
         public Enemy Create(Transform container)
         {
             Enemy enemy = Object.Instantiate(_enemyPrefab, container);

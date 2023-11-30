@@ -1,5 +1,5 @@
 ﻿using Infrastructure.DI;
-using Infrastructure.GameSystem.Installers;
+using Infrastructure.GameSystem.Attributes;
 using Infrastructure.Locator;
 using UnityEngine;
 

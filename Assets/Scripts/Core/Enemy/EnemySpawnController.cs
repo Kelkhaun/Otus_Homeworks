@@ -8,6 +8,7 @@ namespace Core.Enemy
     public sealed class EnemySpawnController : IGameStartListener, IGameFinishListener, IGameUpdateListener
     {
         private EnemyManager _enemyManager;
+        
         private int _timeBetweenSpawn = 1;
         private float _elapsedTime;
         private bool _canSpawn = true;

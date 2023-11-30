@@ -9,15 +9,16 @@ namespace Core.Character
     [Serializable]
     public sealed class PlayerShooter
     {
-        [SerializeField] private WeaponComponent _characterWeapon;
-        [SerializeField] private BulletConfig _bulletConfig;
-        
+        private WeaponComponent _characterWeapon;
+        private BulletConfig _bulletConfig;
         private BulletSystem _bulletSystem;
 
         [Inject]
-        public void Construct(BulletSystem bulletSystem)
+        public void Construct(BulletSystem bulletSystem, PlayerService playerService)
         {
             _bulletSystem = bulletSystem;
+            _characterWeapon =  playerService.Player.GetComponent<WeaponComponent>();
+            _bulletConfig = playerService.BulletConfig;
         }
         
         public void Fire()

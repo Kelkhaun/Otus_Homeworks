@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Ui
 {
     [Serializable]
-    public sealed class StartGameButtonModel : IGameStartListener, IGameFinishListener
+    public sealed class StartGameButtonAdapter : IGameStartListener, IGameFinishListener
     {
         [SerializeField] private ButtonView _startButtonView;
         [SerializeField] private GameLauncher gameLauncher;

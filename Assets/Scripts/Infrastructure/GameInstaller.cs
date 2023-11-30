@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Reflection;
 using Infrastructure.DI;
 using Infrastructure.GameSystem;
-using Infrastructure.GameSystem.Installers;
+using Infrastructure.GameSystem.Attributes;
 using Infrastructure.Locator;
 using UnityEngine;
+using IServiceProvider = Infrastructure.GameSystem.Attributes.IServiceProvider;
 
 namespace Infrastructure
 {
     public abstract class GameInstaller : MonoBehaviour,
         IGameListenerProvider,
-        GameSystem.Installers.IServiceProvider,
+        IServiceProvider,
         IInjectProvider
     {
         public virtual IEnumerable<IGameListener> ProvideListeners()

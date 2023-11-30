@@ -16,9 +16,9 @@ namespace Core.Input
         private PlayerShooter _playerShooter;
 
         [Inject]
-        public void Construct(PlayerShooter playerShooter, KeyboardInput keyboardInput, MoveComponent moveComponent)
+        public void Construct(PlayerShooter playerShooter, KeyboardInput keyboardInput, PlayerService playerService)
         {
-            _moveComponent = moveComponent;
+            _moveComponent = playerService.Player.GetComponent<MoveComponent>();
             _playerShooter = playerShooter;
             _keyboardInput = keyboardInput;
         }

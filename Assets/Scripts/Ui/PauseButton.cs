@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Ui
 {
     [Serializable]
-    public sealed class PauseButtonModel : IGameStartListener, IGameFinishListener
+    public sealed class PauseButton : IGameStartListener, IGameFinishListener
     {
         [SerializeField] private GameManager _gameManager;
         [SerializeField] private ButtonView _button;

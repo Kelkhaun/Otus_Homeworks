@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Core.Level;
-using Core.Pool;
 using Infrastructure.DI;
 using Infrastructure.GameSystem;
 using UnityEngine;
@@ -9,22 +8,24 @@ using UnityEngine;
 namespace Core.Bullets
 {
     [Serializable]
-    public sealed class BulletSystem : MonoPool<Bullet>, IGameFixedUpdateListener
+    public sealed class BulletSystem : IGameFixedUpdateListener
     {
         private readonly List<Bullet> _cacheBullets = new();
-        
+
         private LevelBounds _levelBounds;
+        private BulletPool _bulletPool;
 
         [Inject]
-        public void Construct(LevelBounds levelBounds)
+        public void Construct(LevelBounds levelBounds, BulletPool bulletPool)
         {
             _levelBounds = levelBounds;
+            _bulletPool = bulletPool;
         }
 
         public void OnFixedUpdate(float deltaTime)
         {
             _cacheBullets.Clear();
-            _cacheBullets.AddRange(ActiveObject);
+            _cacheBullets.AddRange(_bulletPool.GetActiveObject());
 
             for (int i = 0, count = _cacheBullets.Count; i < count; i++)
             {
@@ -32,23 +33,15 @@ namespace Core.Bullets
 
                 if (!_levelBounds.IsBounds(bullet.transform.position))
                 {
-                    Release(bullet);
+                    _bulletPool.Release(bullet);
+                    bullet.OnCollisionEntered -= OnCollisionEntered;
                 }
             }
         }
 
-        public override void Release(Bullet bullet)
-        {
-            base.Release(bullet);
-            bullet.OnCollisionEntered -= OnCollisionEntered;
-            bullet.transform.SetParent(Container);
-            ActiveObject.Remove(bullet);
-        }
-
         public void Fire(Args args)
         {
-            Bullet bullet = Get();
-            bullet.transform.SetParent(WorldTransform);
+            Bullet bullet = _bulletPool.Get();
             bullet.SetPosition(args.Position);
             bullet.SetColor(args.Color);
             bullet.SetPhysicsLayer(args.PhysicsLayer);
@@ -56,16 +49,16 @@ namespace Core.Bullets
             bullet.SetIsPlayer(args.IsPlayer);
             bullet.SetVelocity(args.Velocity);
 
-            ActiveObject.Add(bullet);
+            _bulletPool.AddActiveObject(bullet);
             bullet.OnCollisionEntered += OnCollisionEntered;
         }
 
         private void OnCollisionEntered(Bullet bullet, GameObject collisionObject)
         {
-            Release(bullet);
+            _bulletPool.Release(bullet);
             bullet.TryTakeDamage(collisionObject);
         }
-        
+
         public struct Args
         {
             public Vector2 Position;
