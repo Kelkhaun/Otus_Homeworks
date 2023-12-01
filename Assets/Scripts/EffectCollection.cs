@@ -5,11 +5,11 @@ namespace MVA_Lesson.Scripts
 {
     public sealed class EffectCollection
     {
-        public event Action<Effect> OnAdded;
-        public event Action<Effect> OnRemoved;
-
         private readonly HashSet<Effect> _effects = new();
 
+        public event Action<Effect> OnAdded;
+        public event Action<Effect> OnRemoved;
+        
         public void AddEffect(Effect effect)
         {
             _effects.Add(effect);
