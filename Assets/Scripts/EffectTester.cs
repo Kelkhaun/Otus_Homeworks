@@ -27,7 +27,7 @@ namespace MVA_Lesson.Scripts
         }
 
         [Button]
-        public void AddEffect()
+        private void AddEffect()
         {
             if (_configsQueue.TryDequeue(out var config))
             {
@@ -39,16 +39,22 @@ namespace MVA_Lesson.Scripts
         }
 
         [Button]
-        public void AddExistetEffect()
+        private void AddExistetEffect()
         {
+            if (_effects.Count == 0)
+                return;
+            
             int effectIndex = Random.Range(0, _effects.Count);
             var effect = _effects.ToArray()[effectIndex];
             _effectCollection.AddEffect(effect);
         }
 
         [Button]
-        public void DeleteRandomEffect()
+        private void DeleteRandomEffect()
         {
+            if (_effects.Count == 0)
+                return;
+            
             int effectIndex = Random.Range(0, _effects.Count);
             var effect = _effects.ToArray()[effectIndex];
             _effectCollection.RemoveEffect(effect);
