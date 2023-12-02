@@ -1,10 +1,12 @@
-﻿using Infrastructure.DI;
+﻿using System.Collections.Generic;
+using Infrastructure.DI;
 using Infrastructure.GameSystem;
 
 namespace MVA_Lesson.Scripts
 {
     public sealed class EffectCollectionObserver : IGameStartListener, IGameFinishListener
     {
+        private Dictionary<Effect, EffectPresenter> _effectPresenters = new();
         private EffectPresenterFactory _effectPresenterFactory;
         private EffectCollection _effectCollection;
 
@@ -27,30 +29,36 @@ namespace MVA_Lesson.Scripts
             _effectCollection.OnAdded -= OnEffectAdded;
             _effectCollection.OnRemoved -= OnEffectRemoved;
         }
-        
+
         private void CreatePresenters()
         {
             foreach (var effect in _effectCollection.GetEffects())
             {
-                _effectPresenterFactory.CreatePresenter(effect);
+                EffectPresenter presenter = _effectPresenterFactory.CreatePresenter(effect);
+                _effectPresenters.Add(effect, presenter);
             }
         }
 
         private void OnEffectAdded(Effect effect)
         {
-            if (_effectPresenterFactory.TryGetPresenter(effect, out var presenter))
+            if (_effectPresenters.TryGetValue(effect, out EffectPresenter presenter))
             {
                 presenter.UpdateValue(effect.Value);
             }
             else
             {
-                _effectPresenterFactory.CreatePresenter(effect);
+                var effectPresenter = _effectPresenterFactory.CreatePresenter(effect);
+                _effectPresenters.Add(effect, effectPresenter);
             }
         }
 
         private void OnEffectRemoved(Effect effect)
         {
-            _effectPresenterFactory.Remove(effect);
+            if (_effectPresenters.TryGetValue(effect, out EffectPresenter presenter))
+            {
+                presenter.Dispose();
+                _effectPresenters.Remove(effect);
+            }
         }
     }
 }

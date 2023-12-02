@@ -6,7 +6,7 @@ namespace MVA_Lesson.Scripts
     public sealed class Effect
     {
         public float Value { get; private set; }
-        public Sprite Icon { get; }
+        public Sprite Icon { get;  }
         public Color Color { get; }
 
         public event Action<float> OnValueChanged;
