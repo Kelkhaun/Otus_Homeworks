@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 439300461}
   - component: {fileID: 439300460}
   m_Layer: 0
-  m_Name: EffectTester
+  m_Name: '[EffectTester]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
