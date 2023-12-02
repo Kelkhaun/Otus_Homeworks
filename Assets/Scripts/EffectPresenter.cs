@@ -22,11 +22,11 @@ namespace MVA_Lesson.Scripts
         
         public void Dispose()
         {
-            _effect.OnValueChanged -= ViewSetText;
+            _effect.OnValueChanged -= SetViewText;
             Object.Destroy(_view.gameObject);
         }
 
-        private void ViewSetText(float text)
+        private void SetViewText(float text)
         {
             _view.SetText(_effect.Value.ToString());
         }
@@ -36,7 +36,7 @@ namespace MVA_Lesson.Scripts
             _view.SetText(_effect.Value.ToString());
             _view.SetIcon(_effect.Icon);
             _view.SetLabelColor(_effect.Color);
-            _effect.OnValueChanged += ViewSetText;
+            _effect.OnValueChanged += SetViewText;
         }
     }
 }
