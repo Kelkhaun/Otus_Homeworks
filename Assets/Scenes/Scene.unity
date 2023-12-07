@@ -1252,6 +1252,7 @@ MonoBehaviour:
   _currentExperience: {fileID: 115449163}
   _requiredExperience: {fileID: 321106149}
   _levelUpButton: {fileID: 556302945}
+  CloseButton: {fileID: 2121009688}
 --- !u!114 &985274967
 MonoBehaviour:
   m_ObjectHideFlags: 0
