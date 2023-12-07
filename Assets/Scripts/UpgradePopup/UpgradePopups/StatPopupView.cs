@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UpgradePopup.UpgradePopups
 {
-    public class StatPopupView : MonoBehaviour
+    public sealed class StatPopupView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _statText;
 

@@ -4,7 +4,7 @@ using UpgradePopup.Presenter;
 
 namespace UpgradePopup.Factory
 {
-    public class UpgradePresenterFactory
+    public sealed class UpgradePresenterFactory
     {
         private Character.Character _character;
         private CharacterStatPool _characterStatPool;

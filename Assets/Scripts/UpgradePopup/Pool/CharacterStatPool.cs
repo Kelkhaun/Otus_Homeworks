@@ -6,7 +6,7 @@ using UpgradePopup.UpgradePopups;
 
 namespace UpgradePopup.Pool
 {
-    public class CharacterStatPool
+    public sealed class CharacterStatPool
     {
         private Queue<StatPopupView> _pool = new Queue<StatPopupView>();
         private CharacterStatViewFactory _characterStatViewFactory;

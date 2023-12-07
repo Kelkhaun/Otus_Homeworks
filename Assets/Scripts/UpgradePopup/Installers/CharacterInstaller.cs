@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UpgradePopup.Installers
 {
-    public class CharacterInstaller : GameInstaller
+    public sealed class CharacterInstaller : GameInstaller
     {
         [SerializeField, Service(typeof(Character.Character))]
         private Character.Character _character;

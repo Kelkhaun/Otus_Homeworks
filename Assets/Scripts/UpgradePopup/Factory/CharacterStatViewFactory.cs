@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 namespace UpgradePopup.Factory
 {
     [Serializable]
-    public class CharacterStatViewFactory
+    public sealed class CharacterStatViewFactory
     {
         [SerializeField] private StatPopupView _statPopupViewPrefab;
         [SerializeField] private Transform _container;

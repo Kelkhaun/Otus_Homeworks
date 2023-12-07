@@ -8,7 +8,7 @@ using UpgradePopup.UpgradePopups;
 namespace UpgradePopup
 {
     [Serializable]
-    public class UpgradePopupShower
+    public sealed class UpgradePopupShower
     {
         private UpgradePresenterFactory _upgradePresenterFactory;
         private UserInfoUpgradePopup _userInfoUpgradePopup;

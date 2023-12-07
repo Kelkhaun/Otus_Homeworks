@@ -5,7 +5,7 @@ using UpgradePopup.Pool;
 
 namespace UpgradePopup.Presenter
 {
-    public class CharacterUpgradePresenter : IUpgradePresenter
+    public sealed class CharacterUpgradePresenter : IUpgradePresenter
     {
         private Character.Character _character;
         private CharacterStatPool _characterStatPool;
