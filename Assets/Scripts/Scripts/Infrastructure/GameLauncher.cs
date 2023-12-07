@@ -1,0 +1,37 @@
+using System.Collections;
+using Scripts.Infrastructure.GameSystem;
+using UnityEngine;
+
+namespace Scripts.Infrastructure
+{
+    public sealed class GameLauncher : MonoBehaviour
+    {
+        [SerializeField] private GameManager _gameManager;
+        [SerializeField] private float _delay;
+        [SerializeField] private float _countdown;
+
+        private float _startDelay;
+        
+        private void Awake()
+        {
+            _startDelay = _delay;
+        }
+
+        public void StartGame()
+        {
+            StartCoroutine(StartGameRoutine());
+        }
+
+        private IEnumerator StartGameRoutine()
+        {
+            while (_delay > 0)
+            {
+                print($"Старт через {_delay} секунды.");
+                _delay--;
+                yield return new WaitForSeconds(_countdown);
+            }
+
+            _gameManager.StartGame();
+        }
+    }
+}
