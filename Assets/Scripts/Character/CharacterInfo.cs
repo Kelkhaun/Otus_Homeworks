@@ -8,7 +8,7 @@ namespace Character
     [Serializable]
     public sealed class CharacterInfo
     {
-        [ShowInInspector, ReadOnly]
+        [ShowInInspector]
         private readonly HashSet<CharacterStat> _stats = new();
 
         public event Action<CharacterStat> OnStatAdded;
