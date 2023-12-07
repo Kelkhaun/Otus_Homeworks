@@ -1,8 +1,8 @@
-using Scripts.Character;
+using Character;
 using TMPro;
 using UnityEngine;
 
-namespace Scripts.UpgradePopup.UpgradePopups
+namespace UpgradePopup.UpgradePopups
 {
     public class StatPopupView : MonoBehaviour
     {

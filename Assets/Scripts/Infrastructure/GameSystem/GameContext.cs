@@ -1,9 +1,9 @@
-﻿using Scripts.Infrastructure.DI;
-using Scripts.Infrastructure.GameSystem.Attributes;
-using Scripts.Infrastructure.Locator;
+﻿using Infrastructure.DI;
+using Infrastructure.GameSystem.Attributes;
+using Infrastructure.Locator;
 using UnityEngine;
 
-namespace Scripts.Infrastructure.GameSystem
+namespace Infrastructure.GameSystem
 {
     public sealed class GameContext : MonoBehaviour
     {

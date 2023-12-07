@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Scripts.Infrastructure.GameSystem.Attributes
+namespace Infrastructure.GameSystem.Attributes
 {
     public interface IServiceProvider
     {

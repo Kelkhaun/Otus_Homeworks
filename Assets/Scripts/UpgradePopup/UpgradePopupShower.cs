@@ -1,11 +1,11 @@
 ﻿using System;
-using Scripts.Infrastructure.DI;
-using Scripts.UpgradePopup.Factory;
-using Scripts.UpgradePopup.Presenter;
-using Scripts.UpgradePopup.UpgradePopups;
+using Infrastructure.DI;
 using Sirenix.OdinInspector;
+using UpgradePopup.Factory;
+using UpgradePopup.Presenter;
+using UpgradePopup.UpgradePopups;
 
-namespace Scripts.UpgradePopup
+namespace UpgradePopup
 {
     [Serializable]
     public class UpgradePopupShower

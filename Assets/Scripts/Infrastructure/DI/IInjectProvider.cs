@@ -1,6 +1,6 @@
-﻿using Scripts.Infrastructure.Locator;
+﻿using Infrastructure.Locator;
 
-namespace Scripts.Infrastructure.DI
+namespace Infrastructure.DI
 {
     public interface IInjectProvider
     {

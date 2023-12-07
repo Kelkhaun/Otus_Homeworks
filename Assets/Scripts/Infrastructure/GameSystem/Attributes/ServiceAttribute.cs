@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace Scripts.Infrastructure.GameSystem.Attributes
+namespace Infrastructure.GameSystem.Attributes
 {
     [MeansImplicitUse]
     [AttributeUsage(AttributeTargets.Field)]

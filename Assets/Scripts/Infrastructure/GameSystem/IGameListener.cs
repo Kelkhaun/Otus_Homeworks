@@ -1,4 +1,4 @@
-namespace Scripts.Infrastructure.GameSystem
+namespace Infrastructure.GameSystem
 {
     public interface IGameListener
     {

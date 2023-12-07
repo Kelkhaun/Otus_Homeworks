@@ -1,18 +1,18 @@
 ﻿using System;
-using Scripts.UpgradePopup.Presenter;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UpgradePopup.Presenter;
 
-namespace Scripts.UpgradePopup.UpgradePopups
+namespace UpgradePopup.UpgradePopups
 {
     public sealed class UserInfoUpgradePopup : MonoBehaviour
     {
         [SerializeField] private TMP_Text _name;
         [SerializeField] private TMP_Text _description;
         [SerializeField] private Image _profileIcon;
-
-        [field: SerializeField] private Button CloseButton;
+        [SerializeField] private Button _closeButton;
 
         private IUpgradePresenter _presenter;
 
@@ -30,7 +30,7 @@ namespace Scripts.UpgradePopup.UpgradePopups
             _description.SetText(presenter.Description);
             _profileIcon.sprite = presenter.ProfileIcon;
 
-            CloseButton.onClick.AddListener(OnCloseButtonClicked);
+            _closeButton.onClick.AddListener(OnCloseButtonClicked);
             _presenter.OnNameChanged += OnNameChanged;
             _presenter.OnDescriptionChanged += OnDescriptionChanged;
             _presenter.OnIconChanged += OnIconChanged;
@@ -40,7 +40,7 @@ namespace Scripts.UpgradePopup.UpgradePopups
         {
             _presenter.Disable();
             gameObject.SetActive(false);
-            CloseButton.onClick.RemoveListener(OnCloseButtonClicked);
+            _closeButton.onClick.RemoveListener(OnCloseButtonClicked);
             _presenter.OnNameChanged -= OnNameChanged;
             _presenter.OnDescriptionChanged -= OnDescriptionChanged;
             _presenter.OnIconChanged -= OnIconChanged;

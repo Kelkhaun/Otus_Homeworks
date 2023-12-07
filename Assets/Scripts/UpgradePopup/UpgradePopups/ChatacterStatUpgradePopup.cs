@@ -1,8 +1,8 @@
 ﻿using System;
-using Scripts.UpgradePopup.Presenter;
 using UnityEngine;
+using UpgradePopup.Presenter;
 
-namespace Scripts.UpgradePopup.UpgradePopups
+namespace UpgradePopup.UpgradePopups
 {
     public sealed class ChatacterStatUpgradePopup : MonoBehaviour
     {

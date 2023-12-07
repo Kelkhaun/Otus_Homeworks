@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace Scripts.Infrastructure.GameSystem
+namespace Infrastructure.GameSystem
 {
     public sealed class GameManager : SerializedMonoBehaviour
     {

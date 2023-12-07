@@ -1,8 +1,8 @@
 using System.Collections;
-using Scripts.Infrastructure.GameSystem;
+using Infrastructure.GameSystem;
 using UnityEngine;
 
-namespace Scripts.Infrastructure
+namespace Infrastructure
 {
     public sealed class GameLauncher : MonoBehaviour
     {

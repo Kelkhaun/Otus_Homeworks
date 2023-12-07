@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Scripts.Infrastructure.GameSystem
+namespace Infrastructure.GameSystem
 {
     public interface IGameListenerProvider
     {

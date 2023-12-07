@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Scripts.Infrastructure.DI;
-using Scripts.Infrastructure.GameSystem;
-using Scripts.Infrastructure.GameSystem.Attributes;
-using Scripts.Infrastructure.Locator;
+using Infrastructure.DI;
+using Infrastructure.GameSystem;
+using Infrastructure.GameSystem.Attributes;
+using Infrastructure.Locator;
 using UnityEngine;
 
-namespace Scripts.Infrastructure
+namespace Infrastructure
 {
     public abstract class GameInstaller : MonoBehaviour,
         IGameListenerProvider,

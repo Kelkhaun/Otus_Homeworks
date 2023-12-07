@@ -1,7 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 
-namespace Scripts.Character
+namespace Character
 {
     [Serializable]
     public sealed class CharacterLevel

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scripts.UpgradePopup.Presenter
+namespace UpgradePopup.Presenter
 {
     public interface IUpgradePresenter
     {

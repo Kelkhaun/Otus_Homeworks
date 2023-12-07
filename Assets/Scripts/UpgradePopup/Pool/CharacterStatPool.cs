@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Scripts.Character;
-using Scripts.Infrastructure.DI;
-using Scripts.UpgradePopup.Factory;
-using Scripts.UpgradePopup.UpgradePopups;
+using Character;
+using Infrastructure.DI;
+using UpgradePopup.Factory;
+using UpgradePopup.UpgradePopups;
 
-namespace Scripts.UpgradePopup.Pool
+namespace UpgradePopup.Pool
 {
     public class CharacterStatPool
     {

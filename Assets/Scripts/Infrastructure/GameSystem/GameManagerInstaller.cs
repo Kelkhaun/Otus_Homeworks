@@ -1,7 +1,7 @@
-﻿using Scripts.Infrastructure.GameSystem.Attributes;
+﻿using Infrastructure.GameSystem.Attributes;
 using UnityEngine;
 
-namespace Scripts.Infrastructure.GameSystem
+namespace Infrastructure.GameSystem
 {
     public sealed class GameManagerInstaller : GameInstaller
     {

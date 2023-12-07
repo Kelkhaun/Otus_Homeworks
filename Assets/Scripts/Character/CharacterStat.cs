@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Scripts.Character
+namespace Character
 {
     [Serializable]
     public sealed class CharacterStat

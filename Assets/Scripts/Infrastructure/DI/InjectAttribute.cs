@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace Scripts.Infrastructure.DI
+namespace Infrastructure.DI
 {
     [AttributeUsage(AttributeTargets.Method)]
     [MeansImplicitUse]

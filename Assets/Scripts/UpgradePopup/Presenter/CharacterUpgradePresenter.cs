@@ -1,9 +1,9 @@
 ﻿using System;
-using Scripts.Character;
-using Scripts.UpgradePopup.Pool;
+using Character;
 using UnityEngine;
+using UpgradePopup.Pool;
 
-namespace Scripts.UpgradePopup.Presenter
+namespace UpgradePopup.Presenter
 {
     public class CharacterUpgradePresenter : IUpgradePresenter
     {

@@ -1,8 +1,8 @@
-﻿using Scripts.Infrastructure;
-using Scripts.Infrastructure.GameSystem.Attributes;
+﻿using Infrastructure;
+using Infrastructure.GameSystem.Attributes;
 using UnityEngine;
 
-namespace Scripts.UpgradePopup.Installers
+namespace UpgradePopup.Installers
 {
     public class CharacterInstaller : GameInstaller
     {

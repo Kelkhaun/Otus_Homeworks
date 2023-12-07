@@ -1,9 +1,9 @@
 ﻿using System;
-using Scripts.UpgradePopup.UpgradePopups;
 using UnityEngine;
+using UpgradePopup.UpgradePopups;
 using Object = UnityEngine.Object;
 
-namespace Scripts.UpgradePopup.Factory
+namespace UpgradePopup.Factory
 {
     [Serializable]
     public class CharacterStatViewFactory

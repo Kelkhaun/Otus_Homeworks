@@ -1,11 +1,11 @@
-﻿using Scripts.Infrastructure;
-using Scripts.Infrastructure.GameSystem.Attributes;
-using Scripts.UpgradePopup.Factory;
-using Scripts.UpgradePopup.Pool;
-using Scripts.UpgradePopup.UpgradePopups;
+﻿using Infrastructure;
+using Infrastructure.GameSystem.Attributes;
 using UnityEngine;
+using UpgradePopup.Factory;
+using UpgradePopup.Pool;
+using UpgradePopup.UpgradePopups;
 
-namespace Scripts.UpgradePopup.Installers
+namespace UpgradePopup.Installers
 {
     public sealed class UpgradePopupModuleInstaller : GameInstaller
     {

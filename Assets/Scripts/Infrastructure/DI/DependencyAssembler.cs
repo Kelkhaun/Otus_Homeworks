@@ -1,7 +1,7 @@
-using Scripts.Infrastructure.Locator;
+using Infrastructure.Locator;
 using UnityEngine;
 
-namespace Scripts.Infrastructure.DI
+namespace Infrastructure.DI
 {
     public sealed class DependencyAssembler : MonoBehaviour
     {

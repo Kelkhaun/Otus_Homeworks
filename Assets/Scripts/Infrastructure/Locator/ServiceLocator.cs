@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Infrastructure.Locator
+namespace Infrastructure.Locator
 {
     public sealed class ServiceLocator : MonoBehaviour
     {

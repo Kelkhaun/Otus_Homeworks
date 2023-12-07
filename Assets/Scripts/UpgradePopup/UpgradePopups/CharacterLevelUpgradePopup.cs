@@ -1,10 +1,10 @@
 ﻿using System;
-using Scripts.UpgradePopup.Presenter;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UpgradePopup.Presenter;
 
-namespace Scripts.UpgradePopup.UpgradePopups
+namespace UpgradePopup.UpgradePopups
 {
     public sealed class CharacterLevelUpgradePopup : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace Scripts.UpgradePopup.UpgradePopups
         [SerializeField] private TMP_Text _currentExperience;
         [SerializeField] private TMP_Text _requiredExperience;
         [SerializeField] private Button _levelUpButton;
-        [field: SerializeField] private Button CloseButton;
+        [SerializeField] private Button _closeButton;
 
         private IUpgradePresenter _presenter;
 
@@ -33,7 +33,7 @@ namespace Scripts.UpgradePopup.UpgradePopups
             presenter.OnExperienceChanged += OnExperienceChanged;
             presenter.OnLevelUp += OnLevelUp;
             _levelUpButton.onClick.AddListener(OnLevelUpButtonClicked);
-            CloseButton.onClick.AddListener(OnCloseButtonClicked);
+            _closeButton.onClick.AddListener(OnCloseButtonClicked);
         }
 
         private void OnCloseButtonClicked()

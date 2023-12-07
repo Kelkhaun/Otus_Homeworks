@@ -1,8 +1,8 @@
-﻿using Scripts.Infrastructure.DI;
-using Scripts.UpgradePopup.Pool;
-using Scripts.UpgradePopup.Presenter;
+﻿using Infrastructure.DI;
+using UpgradePopup.Pool;
+using UpgradePopup.Presenter;
 
-namespace Scripts.UpgradePopup.Factory
+namespace UpgradePopup.Factory
 {
     public class UpgradePresenterFactory
     {
