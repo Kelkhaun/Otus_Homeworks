@@ -54,7 +54,7 @@ namespace UpgradePopup.Pool
             _pool.Enqueue(view);
         }
 
-        private StatPopupView FindView(CharacterStat characterStat)
+        public StatPopupView FindView(CharacterStat characterStat)
         {
             var view = _cachedPopupViews.Find(x => x.CharacterStat == characterStat);
             return view;

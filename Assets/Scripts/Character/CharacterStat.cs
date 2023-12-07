@@ -13,13 +13,13 @@ namespace Character
         [field: SerializeField]
         public int Value { get; private set; }
         
-        public event Action<int> OnValueChanged; 
+        public event Action<int, CharacterStat> OnValueChanged; 
 
         [Button]
         public void ChangeValue(int value)
         {
             Value = value;
-            OnValueChanged?.Invoke(value);
+            OnValueChanged?.Invoke(value, this);
         }
     }
 }

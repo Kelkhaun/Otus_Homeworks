@@ -51,12 +51,26 @@ namespace UpgradePopup.Presenter
             _character.CharacterLevel.OnExperienceChanged -= ExperienceChanged;
             _character.CharacterInfo.OnStatAdded -= OnStatAdded;
             _character.CharacterInfo.OnStatRemoved -= OnStatRemoved;
+
+            var stats = _character.CharacterInfo.GetStats();
+
+            foreach (var stat in stats)
+            {
+                stat.OnValueChanged -= OnValueChanged;
+            }
         }
 
         private void OnStatAdded(CharacterStat characterStat)
         {
+            characterStat.OnValueChanged += OnValueChanged;
             var statPopupView = _characterStatPool.Get();
-            statPopupView.Initialize(characterStat.Name + ": " + characterStat.Value.ToString(), characterStat);
+            statPopupView.Setup(characterStat.Name + ": " + characterStat.Value.ToString(), characterStat);
+        }
+
+        private void OnValueChanged(int value, CharacterStat characterStat)
+        {
+            var view = _characterStatPool.FindView(characterStat);
+            view.Setup(characterStat.Name + ": " + characterStat.Value.ToString(), characterStat);
         }
 
         private void OnStatRemoved(CharacterStat characterStat)

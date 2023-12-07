@@ -10,7 +10,7 @@ namespace UpgradePopup.UpgradePopups
 
         public CharacterStat CharacterStat { get; private set; }
 
-        public void Initialize(string text, CharacterStat characterStat)
+        public void Setup(string text, CharacterStat characterStat)
         {
             CharacterStat = characterStat;
             _statText.SetText(text);
