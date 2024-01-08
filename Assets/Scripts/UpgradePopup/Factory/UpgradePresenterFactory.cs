@@ -6,11 +6,11 @@ namespace UpgradePopup.Factory
 {
     public sealed class UpgradePresenterFactory
     {
-        private Character.Character _character;
+        private CharacterScripts.Character _character;
         private CharacterStatPool _characterStatPool;
 
         [Inject]
-        private void Construct(Character.Character character, CharacterStatPool characterStatPool)
+        private void Construct(CharacterScripts.Character character, CharacterStatPool characterStatPool)
         {
             _character = character;
             _characterStatPool = characterStatPool;
@@ -18,7 +18,8 @@ namespace UpgradePopup.Factory
 
         public IUpgradePresenter Create()
         {
-            return new CharacterUpgradePresenter(_character, _characterStatPool);
+            var characterPresenter = new CharacterPresenter(_character, _characterStatPool);
+            return characterPresenter;
         }
     }
 }

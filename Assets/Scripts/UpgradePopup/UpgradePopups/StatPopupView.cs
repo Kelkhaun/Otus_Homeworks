@@ -1,4 +1,4 @@
-using Character;
+using CharacterScripts;
 using TMPro;
 using UnityEngine;
 

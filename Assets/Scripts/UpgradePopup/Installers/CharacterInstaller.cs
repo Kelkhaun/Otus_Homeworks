@@ -6,7 +6,7 @@ namespace UpgradePopup.Installers
 {
     public sealed class CharacterInstaller : GameInstaller
     {
-        [SerializeField, Service(typeof(Character.Character))]
-        private Character.Character _character;
+        [SerializeField, Service(typeof(CharacterScripts.Character))]
+        private CharacterScripts.Character _character;
     }
 }

@@ -6,28 +6,29 @@ using UpgradePopup.Presenter;
 
 namespace UpgradePopup.UpgradePopups
 {
-    public sealed class UserInfoUpgradePopup : MonoBehaviour
+    public sealed class CharacterInfoView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _name;
         [SerializeField] private TMP_Text _description;
         [SerializeField] private Image _profileIcon;
         [SerializeField] private Button _closeButton;
 
-        private IUpgradePresenter _presenter;
+        private IUpgradeInfoPresenter _presenter;
 
         public void Show(object args)
         {
-            if (args is not IUpgradePresenter presenter)
+            if (args is not IUpgradeInfoPresenter presenter)
             {
-                throw new Exception("Expected Product Presenter");
+                throw new Exception("Expected Upgrade Presenter");
             }
 
             _presenter = presenter;
+
             gameObject.SetActive(true);
 
-            _name.SetText(presenter.Name);
-            _description.SetText(presenter.Description);
-            _profileIcon.sprite = presenter.ProfileIcon;
+            _name.SetText(_presenter.Name);
+            _description.SetText(_presenter.Description);
+            _profileIcon.sprite = _presenter.ProfileIcon;
 
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
             _presenter.OnNameChanged += OnNameChanged;

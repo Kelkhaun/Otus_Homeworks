@@ -16,7 +16,6 @@ namespace UpgradePopup.UpgradePopups
             }
 
             _presenter = presenter;
-            _presenter.Enable();
             gameObject.SetActive(true);
         }
     }

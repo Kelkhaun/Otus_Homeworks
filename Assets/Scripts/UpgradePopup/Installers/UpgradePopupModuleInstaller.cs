@@ -9,14 +9,11 @@ namespace UpgradePopup.Installers
 {
     public sealed class UpgradePopupModuleInstaller : GameInstaller
     {
-        [SerializeField, Service(typeof(UserInfoUpgradePopup))]
-        private UserInfoUpgradePopup _userInfoUpgradePopup;
-
-        [SerializeField, Service(typeof(CharacterLevelUpgradePopup))]
-        private CharacterLevelUpgradePopup _characterLevelUpgradePopup;
-
         [SerializeField, Service(typeof(CharacterInfoUpgradePopup))]
         private CharacterInfoUpgradePopup _characterInfoUpgradePopup;
+
+        [SerializeField, Service(typeof(CharacterPopup))]
+        private CharacterPopup _characterPopup;
 
         [Service(typeof(UpgradePresenterFactory))]
         private UpgradePresenterFactory _upgradePresenterFactory = new();

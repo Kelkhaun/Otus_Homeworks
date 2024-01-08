@@ -11,17 +11,12 @@ namespace UpgradePopup
     public sealed class UpgradePopupShower
     {
         private UpgradePresenterFactory _upgradePresenterFactory;
-        private UserInfoUpgradePopup _userInfoUpgradePopup;
-        private CharacterLevelUpgradePopup _characterLevelUpgradePopup;
-        private CharacterInfoUpgradePopup _characterInfoUpgradePopup;
+        private CharacterPopup _characterPopup;
 
         [Inject]
-        public void Construct(UpgradePresenterFactory factory, UserInfoUpgradePopup userInfoUpgradePopup,
-            CharacterLevelUpgradePopup characterLevelUpgradePopup, CharacterInfoUpgradePopup characterInfoUpgradePopup)
+        public void Construct(UpgradePresenterFactory factory, CharacterPopup characterPopup)
         {
-            _characterInfoUpgradePopup = characterInfoUpgradePopup;
-            _characterLevelUpgradePopup = characterLevelUpgradePopup;
-            _userInfoUpgradePopup = userInfoUpgradePopup;
+            _characterPopup = characterPopup;
             _upgradePresenterFactory = factory;
         }
 
@@ -29,9 +24,7 @@ namespace UpgradePopup
         public void Show()
         {
             IUpgradePresenter presenter = _upgradePresenterFactory.Create();
-            _userInfoUpgradePopup.Show(presenter);
-            _characterLevelUpgradePopup.Show(presenter);
-            _characterInfoUpgradePopup.Show(presenter);
+            _characterPopup.Show(presenter);
         }
     }
 }

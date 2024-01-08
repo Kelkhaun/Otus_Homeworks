@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Character;
+using CharacterScripts;
 using Infrastructure.DI;
 using UpgradePopup.Factory;
 using UpgradePopup.UpgradePopups;
